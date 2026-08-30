@@ -94,7 +94,7 @@ export const services = [
     title: 'Dine-In',
     description: 'Pull up a chair and enjoy your meal with us, steps from the bay.',
     icon: 'utensils',
-    enabled: true, // TODO(client): confirm dine-in is offered before launch.
+    enabled: false, // Client confirmed: no dine-in / reservations — takeout + delivery only.
   },
 ]
 

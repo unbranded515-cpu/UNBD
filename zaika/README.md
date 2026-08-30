@@ -63,7 +63,8 @@ Search the codebase for these `TODO` / `NOTE` markers:
 4. **Order / delivery links** — `orderOnlineUrl` and `deliveryPartners` in
    `data/site.js` point to `#` until real store URLs are confirmed.
 5. **Facebook URL** — placeholder in `data/site.js` → `social.facebook.url`.
-6. **Services / dine-in** — confirm with the client whether Takeout, Delivery
-   and **Dine-In** all apply; toggle each via `enabled` in `data/site.js`.
-7. **Testimonials** — placeholder quotes in `data/site.js` → swap for real
+6. **Testimonials** — placeholder quotes in `data/site.js` → swap for real
    Google reviews.
+
+> Services: client confirmed **takeout + delivery only** (no dine-in /
+> reservations). Dine-in is disabled via `enabled: false` in `data/site.js`.
