@@ -37,3 +37,23 @@ body {
     @apply font-mono text-[11px] uppercase tracking-[0.18em] text-coralink;
   }
 }
+
+/* Rendered blog article */
+.prose-unbranded h2 {
+  @apply mt-6 mb-2 font-display text-xl font-extrabold;
+}
+.prose-unbranded h3 {
+  @apply mt-4 mb-1.5 font-display text-lg font-bold;
+}
+.prose-unbranded p {
+  @apply mb-3 text-[15px] leading-relaxed text-ink2;
+}
+.prose-unbranded ul {
+  @apply mb-3 list-disc pl-5 text-[15px] text-ink2;
+}
+.prose-unbranded li {
+  @apply mb-1;
+}
+.prose-unbranded a {
+  @apply text-coralink underline;
+}
