@@ -80,7 +80,7 @@ export default function SeoPage() {
           <div className="flex flex-wrap items-center gap-5">
             <div
               className="grid h-24 w-24 flex-none place-items-center rounded-full"
-              style={{ background: `conic-gradient(${ringColor} ${result.score}%, #EFEADD 0)` }}
+              style={{ background: `conic-gradient(${ringColor} ${result.score}%, #FFF4EC 0)` }}
             >
               <div className="grid h-[76px] w-[76px] place-items-center rounded-full bg-paper">
                 <b className="font-display text-2xl" style={{ color: ringColor }}>{result.score}</b>
