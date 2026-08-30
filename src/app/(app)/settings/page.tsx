@@ -18,7 +18,7 @@ export default function SettingsPage() {
   }, [active?.id]); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (!ready) return <div className="px-6 py-16 text-center text-muted">Loading…</div>;
-  if (!active || !form) return <div className="mx-auto max-w-xl px-6 py-16 text-center"><h1 className="font-display text-2xl font-extrabold">No brand selected</h1><p className="mt-2 text-ink2">Add a brand from the <Link href="/" className="font-semibold text-coralink hover:underline">home page</Link> first.</p></div>;
+  if (!active || !form) return <div className="mx-auto max-w-xl px-6 py-16 text-center"><h1 className="font-display text-2xl font-extrabold">No brand selected</h1><p className="mt-2 text-ink2">Add a brand from the <Link href="/dashboard" className="font-semibold text-coralink hover:underline">home page</Link> first.</p></div>;
 
   function set<K extends keyof Brand>(key: K, value: Brand[K]) {
     setForm((f) => (f ? { ...f, [key]: value } : f));

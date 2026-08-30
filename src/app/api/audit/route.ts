@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getClient, hasApiKey, MODEL, textOf } from "@/lib/anthropic";
-import { analyze, fetchHtml, firstFix, isValidUrl, normalizeUrl } from "@/lib/seo";
+import { aeoChecks, analyze, fetchHtml, firstFix, guessName, isValidUrl, normalizeUrl } from "@/lib/seo";
 
 export const runtime = "nodejs";
 
@@ -23,6 +23,7 @@ export async function POST(req: NextRequest) {
   }
 
   const { checks, score, title } = analyze(html, url, keyword);
+  const aeo = aeoChecks(html, guessName(html, url));
 
   let summary = "";
   if (hasApiKey) {
@@ -41,5 +42,5 @@ export async function POST(req: NextRequest) {
   }
   if (!summary) summary = firstFix(checks);
 
-  return NextResponse.json({ url, title, score, checks, summary });
+  return NextResponse.json({ url, title, score, checks, summary, aeo });
 }

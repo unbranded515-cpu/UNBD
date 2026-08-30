@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getClient, hasApiKey, MODEL, textOf } from "@/lib/anthropic";
-import { analyze, fetchHtml, firstFix, guessName, isValidUrl, normalizeUrl } from "@/lib/seo";
+import { aeoChecks, analyze, fetchHtml, firstFix, guessName, isValidUrl, normalizeUrl } from "@/lib/seo";
 
 export const runtime = "nodejs";
 
@@ -27,6 +27,7 @@ export async function POST(req: NextRequest) {
   const audit = analyze(html, url, "");
   const summary = firstFix(audit.checks);
   const fallbackName = guessName(html, url);
+  const aeo = aeoChecks(html, fallbackName);
 
   // Default profile (used as-is when there's no API key).
   let profile = {
@@ -68,7 +69,7 @@ export async function POST(req: NextRequest) {
   return NextResponse.json({
     url,
     profile,
-    audit: { score: audit.score, title: audit.title, summary, checks: audit.checks },
+    audit: { score: audit.score, title: audit.title, summary, checks: audit.checks, aeo },
     source: hasApiKey ? "ai" : "fallback",
   });
 }

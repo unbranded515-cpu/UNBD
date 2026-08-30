@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useBrandsCtx } from "@/components/BrandsProvider";
 
 interface Check { state: "good" | "warn" | "bad"; title: string; detail: string; }
-interface AuditResult { url: string; title: string | null; score: number; checks: Check[]; summary: string; }
+interface AuditResult { url: string; title: string | null; score: number; checks: Check[]; summary: string; aeo?: Check[]; }
 
 const badge: Record<Check["state"], string> = { good: "bg-good/15 text-good", warn: "bg-warn/18 text-warn", bad: "bg-bad/15 text-bad" };
 const badgeLabel: Record<Check["state"], string> = { good: "Good", warn: "Fix", bad: "Urgent" };
@@ -33,7 +33,7 @@ export default function SeoPage() {
       const data = await res.json();
       if (data.checks) {
         setResult(data);
-        if (active) updateBrand(active.id, { audit: { score: data.score, title: data.title, summary: data.summary, checks: data.checks }, website: data.url });
+        if (active) updateBrand(active.id, { audit: { score: data.score, title: data.title, summary: data.summary, checks: data.checks, aeo: data.aeo }, website: data.url });
       } else setError(data.error || "Audit failed.");
     } catch { setError("Network error — please try again."); }
     finally { setBusy(false); }
@@ -72,6 +72,26 @@ export default function SeoPage() {
           </div>
           <div className="mt-5 divide-y divide-line">
             {result.checks.map((c, i) => (
+              <div key={i} className="flex items-start gap-3 py-3">
+                <span className={`mt-0.5 flex-none rounded px-2 py-0.5 text-[11px] font-bold uppercase ${badge[c.state]}`}>{badgeLabel[c.state]}</span>
+                <div><b className="text-sm">{c.title}</b><p className="text-sm text-muted">{c.detail}</p></div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {result?.aeo && result.aeo.length > 0 && (
+        <div className="card mt-6">
+          <div className="flex items-center gap-2">
+            <span className="grid h-9 w-9 place-items-center rounded-lg bg-surface2 text-coral"><svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.7"><circle cx="12" cy="12" r="9" /><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18" /></svg></span>
+            <div>
+              <h2 className="font-display text-xl font-extrabold">AI visibility</h2>
+              <p className="font-mono text-[11px] uppercase tracking-wide text-coralink">Get recommended by ChatGPT · Claude · Gemini</p>
+            </div>
+          </div>
+          <div className="mt-4 divide-y divide-line">
+            {result.aeo.map((c, i) => (
               <div key={i} className="flex items-start gap-3 py-3">
                 <span className={`mt-0.5 flex-none rounded px-2 py-0.5 text-[11px] font-bold uppercase ${badge[c.state]}`}>{badgeLabel[c.state]}</span>
                 <div><b className="text-sm">{c.title}</b><p className="text-sm text-muted">{c.detail}</p></div>

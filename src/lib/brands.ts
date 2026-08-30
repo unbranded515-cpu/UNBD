@@ -5,11 +5,15 @@ import type { BrandVoice } from "./types";
 
 export const MAX_BRANDS = 5;
 
+type CheckLite = { state: "good" | "warn" | "bad"; title: string; detail: string };
+
 export interface AuditData {
   score: number;
   title: string | null;
   summary: string;
-  checks: { state: "good" | "warn" | "bad"; title: string; detail: string }[];
+  checks: CheckLite[];
+  /** AI visibility (ChatGPT/Claude/Gemini) recommendations. */
+  aeo?: CheckLite[];
 }
 
 /** A saved brand / project. Extends the voice fields with identity + data. */

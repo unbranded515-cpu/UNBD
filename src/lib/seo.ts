@@ -77,6 +77,33 @@ export function analyze(html: string, url: string, keyword: string): { checks: C
   return { checks, score, title };
 }
 
+/**
+ * "AI visibility" (AEO/GEO) checks — how likely AI assistants like ChatGPT,
+ * Claude, and Gemini are to understand and recommend this business.
+ */
+export function aeoChecks(html: string, name: string): Check[] {
+  const checks: Check[] = [];
+  const lower = html.toLowerCase();
+  const textOnly = html.replace(/<script[\s\S]*?<\/script>/gi, "").replace(/<style[\s\S]*?<\/style>/gi, "").replace(/<[^>]+>/g, " ");
+  const words = (textOnly.match(/\b\w+\b/g) || []).length;
+  const hasSchema = /application\/ld\+json/i.test(html);
+  const hasFaq = /faq|frequently asked|<h[23][^>]*>[^<]*\?/i.test(lower);
+  const hasAbout = /about us|who we are|our story|about-us/.test(lower);
+  const hasPhone = /(\+?\d[\d\s().-]{7,}\d)/.test(textOnly);
+  const hasHours = /hours|open\s|mon|monday|opening times/.test(lower);
+
+  const add = (state: CheckState, t: string, d: string) => checks.push({ state, title: t, detail: d });
+
+  add(hasSchema ? "good" : "bad", "Machine-readable facts", hasSchema ? "Structured data is present — AI can read your business facts directly." : "No structured data (schema). Add LocalBusiness JSON-LD so ChatGPT, Claude & Gemini can quote your name, address, hours and services accurately.");
+  add(hasAbout && words >= 300 ? "good" : "warn", "Clear, factual description", hasAbout && words >= 300 ? "You describe who you are and what you offer in plain language — exactly what AI models cite." : "AI assistants recommend businesses whose pages plainly state who you are, what you sell, and who you serve. Add a clear About + services section.");
+  add(hasFaq ? "good" : "warn", "Question-and-answer content", hasFaq ? "FAQ-style content detected — AI loves pulling answers from these." : "Add an FAQ answering the real questions customers ask. AI assistants lift answers straight from FAQ content.");
+  add(hasPhone && hasHours ? "good" : "warn", "Contact details & hours", hasPhone && hasHours ? "Phone and hours are on the page — AI can surface them." : "Make your phone, address and opening hours obvious on the page so AI can confidently share them.");
+  add("warn", "Presence on trusted sources", `AI models trust businesses mentioned across the web. Get ${name || "your business"} listed on Google, Yelp, Apple Maps, and relevant local directories, and earn a few local press/blog mentions.`);
+  add("warn", "Reviews AI can see", "Strong, recent reviews shape what AI recommends. Keep gathering Google reviews and reply to them — a job Unbranded automates for you.");
+
+  return checks;
+}
+
 export function firstFix(checks: Check[]): string {
   const c = checks.find((x) => x.state === "bad") || checks.find((x) => x.state === "warn");
   return c ? `Start here: ${c.title.toLowerCase()} — ${c.detail}` : "Great foundation — keep publishing fresh, keyword-focused content and gathering Google reviews.";
