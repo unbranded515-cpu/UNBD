@@ -123,6 +123,25 @@ Move them to a database when you add multi-user accounts.
 
 ---
 
+## Deploy (get a live URL)
+
+The app is a standard Next.js project — **Vercel** deploys it with zero config.
+
+1. Push this branch to GitHub (already done).
+2. Go to [vercel.com/new](https://vercel.com/new), import the **UNBD** repo,
+   and pick this branch.
+3. Add environment variables in the Vercel project settings:
+   - `ANTHROPIC_API_KEY` (for live AI; omit to run in draft mode)
+   - `ANTHROPIC_MODEL` (optional, e.g. `claude-haiku-4-5` for cheaper replies)
+   - the `GOOGLE_*` vars later, when you activate Google
+4. Deploy. You'll get a URL like `unbranded.vercel.app` to open on your phone
+   and share with your test clients.
+5. **After deploy, set your production redirect URI** in Google Cloud to
+   `https://YOUR-URL/api/google/callback` and add it to `GOOGLE_REDIRECT_URI`.
+
+> Any Node host works too (`npm run build && npm run start`). It needs a Node
+> runtime — the API routes are server-side, so it can't be a purely static host.
+
 ## Scripts
 
 ```bash
