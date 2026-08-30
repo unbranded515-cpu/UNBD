@@ -20,8 +20,9 @@ upgrades to live AI the moment you add a Claude API key.
 | **Review inbox UI** | ✅ Working | Draft, edit, regenerate, copy. Add your own reviews. `src/app/reviews` |
 | **Brand voice profile** | ✅ Working | Tone, keywords, sign-off, notes — drives every reply. `src/app/settings` |
 | **Website / SEO audit** | ✅ Working | Real on-page crawl + scored report + AI action plan. `src/app/seo` |
-| Google Business Profile sync | 🔜 Phase 2 | Pull reviews & post replies automatically (needs Google API access) |
-| Auto-blog + publishing | 🔜 Phase 2 | AI blogs that publish to WordPress/Shopify |
+| **AI blog writer** | ✅ Working | SEO posts in your brand voice; copy HTML or download. `src/app/blog` |
+| **Google connect (OAuth)** | ✅ Wired | Full OAuth + sync + post-reply flow; goes live once you add creds + API access |
+| Auto-blog publishing to site | 🔜 Phase 2 | One-click publish to WordPress/Shopify (export works today) |
 | Accounts + Stripe billing | 🔜 Phase 2 | Multi-user, plans |
 
 **Draft mode vs. live:** every feature works without any key using sensible
@@ -94,6 +95,27 @@ Profile API**. Honest sequencing, because this is the gating dependency:
 
 Until approval lands, **draft mode** is the product: generate → copy → paste
 into Google. That's fully functional today.
+
+### Turning Google on (once you have access)
+
+The OAuth flow is already built (`/api/google/*` + the Connect banner on the
+Reviews page). To activate:
+
+1. In [Google Cloud Console](https://console.cloud.google.com): create an OAuth
+   2.0 Client ID (Web application), and add the redirect URI
+   `http://localhost:3000/api/google/callback` (and your production URL).
+2. Enable the Business Profile APIs and request access for review management.
+3. Put the values in `.env.local`:
+   ```
+   GOOGLE_CLIENT_ID=...
+   GOOGLE_CLIENT_SECRET=...
+   GOOGLE_REDIRECT_URI=http://localhost:3000/api/google/callback
+   ```
+4. Restart, open **/reviews**, click **Connect Google**, then **Sync live
+   reviews**. Approved replies post back with **Post to Google**.
+
+Tokens are stored in httpOnly cookies (fine for single-business testing).
+Move them to a database when you add multi-user accounts.
 
 > ⚠️ **Never generate fake reviews.** Unbranded only replies to real reviews
 > and helps happy customers leave genuine ones. Fake reviews violate Google

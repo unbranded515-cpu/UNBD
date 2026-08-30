@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useBrand } from "@/lib/useBrand";
+import { GoogleConnect } from "@/components/GoogleConnect";
 import { SAMPLE_REVIEWS } from "@/lib/sampleReviews";
 import { sentimentForRating, type Review, type Sentiment } from "@/lib/types";
 
@@ -48,6 +49,25 @@ export default function ReviewsPage() {
       }
     } catch {
       setNotice((n) => ({ ...n, [r.id]: "Network error — please try again." }));
+    } finally {
+      setBusy(null);
+    }
+  }
+
+  async function postToGoogle(r: Review) {
+    const text = drafts[r.id];
+    if (!text) return;
+    setBusy(r.id);
+    try {
+      const res = await fetch("/api/google/reply", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ reviewName: r.id, comment: text }),
+      });
+      const data = await res.json();
+      setNotice((n) => ({ ...n, [r.id]: data.ok ? "Posted to Google ✓" : data.error || "Couldn't post to Google." }));
+    } catch {
+      setNotice((n) => ({ ...n, [r.id]: "Network error posting to Google." }));
     } finally {
       setBusy(null);
     }
@@ -103,6 +123,8 @@ export default function ReviewsPage() {
         </button>
       </div>
 
+      <GoogleConnect onSync={(live) => live.length && setReviews(live)} />
+
       {adding && (
         <div className="card mt-5">
           <div className="grid gap-3 sm:grid-cols-[1fr_auto]">
@@ -154,7 +176,12 @@ export default function ReviewsPage() {
                   />
                   <div className="mt-2 flex items-center justify-between gap-2">
                     <span className="text-xs text-muted">{notice[r.id]}</span>
-                    <button className="btn-ghost !py-1.5 !text-xs" onClick={() => copy(r.id)}>Copy reply</button>
+                    <div className="flex gap-2">
+                      {r.id.includes("reviews/") && (
+                        <button className="btn-dark !py-1.5 !text-xs" onClick={() => postToGoogle(r)} disabled={busy === r.id}>Post to Google</button>
+                      )}
+                      <button className="btn-ghost !py-1.5 !text-xs" onClick={() => copy(r.id)}>Copy reply</button>
+                    </div>
                   </div>
                 </div>
               )}
