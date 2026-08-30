@@ -10,6 +10,8 @@ interface Body {
   keyword: string;
   length: "short" | "medium" | "long";
   brand: BrandVoice;
+  /** Optional website + audit context so the post reflects the real business. */
+  context?: string;
 }
 
 interface BlogPost {
@@ -78,12 +80,20 @@ export async function POST(req: NextRequest) {
   } catch {
     return NextResponse.json({ error: "Invalid JSON body." }, { status: 400 });
   }
-  const { topic, keyword, length, brand } = body;
+  const { topic, keyword, length, brand, context } = body;
   if (!topic?.trim()) return NextResponse.json({ error: "Enter a topic." }, { status: 400 });
 
   if (!hasApiKey) {
     return NextResponse.json({ post: fallbackPost(topic, keyword, brand), source: "fallback" });
   }
+
+  const userMsg = [
+    context ? `About this business (from their website):\n${context}\n` : "",
+    `Topic: ${topic}`,
+    `Target keyword: ${keyword || topic}`,
+    ``,
+    `Write the post as JSON.`,
+  ].join("\n");
 
   try {
     const message = await getClient().messages.create({
@@ -91,7 +101,7 @@ export async function POST(req: NextRequest) {
       max_tokens: 4000,
       output_config: { effort: "medium" },
       system: systemPrompt(brand, length),
-      messages: [{ role: "user", content: `Topic: ${topic}\nTarget keyword: ${keyword || topic}\n\nWrite the post as JSON.` }],
+      messages: [{ role: "user", content: userMsg }],
     });
     const raw = textOf(message).replace(/^```json\s*|\s*```$/g, "").trim();
     let post: BlogPost;
