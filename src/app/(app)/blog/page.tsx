@@ -16,17 +16,20 @@ export default function BlogPage() {
   const [note, setNote] = useState("");
   const [post, setPost] = useState<BlogPost | null>(null);
 
-  async function generate() {
-    if (!topic.trim() || !active) return;
+  async function generate(auto: boolean) {
+    if (!active) return;
+    if (!auto && !topic.trim()) return;
     setBusy(true); setError(""); setNote(""); setPost(null);
     // Give the model real context about this brand's website.
     const context = [
       active.website ? `Website: ${active.website}` : "",
+      `Business: ${active.businessName} — ${active.businessType}${active.city ? `, ${active.city}` : ""}`,
       active.description ? `About: ${active.description}` : "",
+      active.keywords?.length ? `Keywords they care about: ${active.keywords.join(", ")}` : "",
       active.audit?.summary ? `SEO note: ${active.audit.summary}` : "",
     ].filter(Boolean).join("\n");
     try {
-      const res = await fetch("/api/blog", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ topic, keyword, length, brand: active, context }) });
+      const res = await fetch("/api/blog", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ topic, keyword, length, brand: active, context, auto }) });
       const data = await res.json();
       if (data.post) {
         setPost(data.post);
@@ -62,18 +65,31 @@ export default function BlogPage() {
     <div className="mx-auto max-w-4xl px-6 py-10">
       <span className="eyebrow">Blog writer · {active.businessName}</span>
       <h1 className="mt-2 font-display text-3xl font-extrabold tracking-tight">AI blogs that help you rank</h1>
-      <p className="mt-2 text-ink2">Posts written in {active.businessName}&apos;s voice{active.website ? ", informed by their website" : ""}.</p>
+      <p className="mt-2 text-ink2">Let AI do it all — it reads {active.businessName}&apos;s{active.website ? " website" : " details"}, picks the topic and keywords, and writes the post.</p>
 
-      <div className="card mt-6">
-        <label className="label">What should the post be about?</label>
-        <input className="inp" placeholder="e.g. How to choose the right coffee beans" value={topic} onChange={(e) => setTopic(e.target.value)} onKeyDown={(e) => e.key === "Enter" && generate()} />
-        <div className="mt-3 grid gap-3 sm:grid-cols-2">
-          <div><label className="label">Target keyword (optional)</label><input className="inp" placeholder={active.keywords?.[0] || "best coffee beans Austin"} value={keyword} onChange={(e) => setKeyword(e.target.value)} /></div>
-          <div><label className="label">Length</label><select className="inp" value={length} onChange={(e) => setLength(e.target.value as typeof length)}><option value="short">Short (~500 words)</option><option value="medium">Medium (~850 words)</option><option value="long">Long (~1400 words)</option></select></div>
+      {/* One-click, zero-input auto blog */}
+      <div className="card mt-6 flex flex-col items-start gap-3 sm:flex-row sm:items-center">
+        <div className="flex-1">
+          <h3 className="font-display text-lg font-extrabold">Generate a blog automatically</h3>
+          <p className="text-sm text-ink2">No typing needed. AI chooses the best topic + keywords for {active.businessName} and writes the whole post.</p>
         </div>
-        <div className="mt-4"><button className="btn-primary" onClick={generate} disabled={busy}>{busy ? "Writing…" : "Generate post"}</button></div>
-        {error && <p className="mt-3 text-sm text-bad">{error}</p>}
+        <div className="flex items-center gap-2">
+          <select className="inp !w-auto" value={length} onChange={(e) => setLength(e.target.value as typeof length)}><option value="short">Short</option><option value="medium">Medium</option><option value="long">Long</option></select>
+          <button className="btn-primary flex-none" onClick={() => generate(true)} disabled={busy}>{busy ? "Writing…" : "✨ Generate blog"}</button>
+        </div>
       </div>
+
+      {/* Optional manual topic */}
+      <details className="mt-3">
+        <summary className="cursor-pointer text-sm font-semibold text-coralink">Or write about a specific topic →</summary>
+        <div className="card mt-2">
+          <label className="label">What should the post be about?</label>
+          <input className="inp" placeholder="e.g. How to choose the right coffee beans" value={topic} onChange={(e) => setTopic(e.target.value)} onKeyDown={(e) => e.key === "Enter" && generate(false)} />
+          <div className="mt-3"><label className="label">Target keyword (optional — AI picks one if blank)</label><input className="inp" placeholder={active.keywords?.[0] || "best coffee beans Austin"} value={keyword} onChange={(e) => setKeyword(e.target.value)} /></div>
+          <div className="mt-4"><button className="btn-ghost" onClick={() => generate(false)} disabled={busy}>{busy ? "Writing…" : "Generate this topic"}</button></div>
+        </div>
+      </details>
+      {error && <p className="mt-3 text-sm text-bad">{error}</p>}
 
       {post && (
         <div className="card mt-6">

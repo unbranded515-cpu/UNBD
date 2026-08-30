@@ -12,6 +12,8 @@ interface Body {
   brand: BrandVoice;
   /** Optional website + audit context so the post reflects the real business. */
   context?: string;
+  /** When true, AI picks the topic and keywords itself — zero input needed. */
+  auto?: boolean;
 }
 
 interface BlogPost {
@@ -32,27 +34,37 @@ function slugify(s: string): string {
   return s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 60);
 }
 
-function systemPrompt(brand: BrandVoice, length: Body["length"]): string {
+function systemPrompt(brand: BrandVoice, length: Body["length"], auto: boolean): string {
   return [
     `You are an expert SEO content writer for "${brand.businessName}", a ${brand.businessType} in ${brand.city}.`,
     `Write a blog post that helps this business rank higher on Google for local searches.`,
     ``,
+    auto
+      ? `Pick the single best blog topic for this business yourself — something their customers actually search for — and choose 3–5 strong local SEO keywords. Do it all; the owner gave no input.`
+      : ``,
+    ``,
     `Return ONLY valid JSON (no markdown fence) with this exact shape:`,
     `{"title": string, "metaDescription": string (140-160 chars), "slug": string (kebab-case), "html": string, "keywords": string[]}`,
     ``,
+    `The "title" must be a compelling, click-worthy heading. The "keywords" are the target keywords you chose.`,
     `The "html" is the article body as clean semantic HTML using <h2>, <h3>, <p>, <ul>, <li> — no <html>/<head>/<body> wrapper, no inline styles.`,
     `Length: ${WORDS[length]}.`,
     `Voice: ${brand.tone}, helpful and genuine — never robotic or obviously AI.`,
-    `Weave in the target keyword and the city "${brand.city}" naturally in the title, first paragraph, and one H2. Never keyword-stuff.`,
-    brand.keywords.length ? `Related phrases to use where natural: ${brand.keywords.join("; ")}.` : ``,
+    `Weave the main keyword and the city "${brand.city}" naturally into the title, first paragraph, and one H2. Never keyword-stuff.`,
+    brand.keywords.length ? `The business also cares about: ${brand.keywords.join("; ")}.` : ``,
     `Open with a hook, give genuinely useful, specific advice, and end with a soft call to action to visit or contact ${brand.businessName}.`,
   ]
     .filter(Boolean)
     .join("\n");
 }
 
+function autoTopic(brand: BrandVoice): string {
+  const t = brand.businessType.split("/")[0].trim().toLowerCase();
+  return `5 things to know about choosing a ${t} in ${brand.city || "your area"}`;
+}
+
 function fallbackPost(topic: string, keyword: string, brand: BrandVoice): BlogPost {
-  const kw = keyword.trim() || topic;
+  const kw = (keyword || "").trim() || topic;
   const title = `${topic} — A Local Guide from ${brand.businessName}`;
   return {
     title,
@@ -80,19 +92,18 @@ export async function POST(req: NextRequest) {
   } catch {
     return NextResponse.json({ error: "Invalid JSON body." }, { status: 400 });
   }
-  const { topic, keyword, length, brand, context } = body;
-  if (!topic?.trim()) return NextResponse.json({ error: "Enter a topic." }, { status: 400 });
+  const { topic, keyword, length, brand, context, auto } = body;
+  if (!auto && !topic?.trim()) return NextResponse.json({ error: "Enter a topic." }, { status: 400 });
+
+  const effTopic = topic?.trim() || autoTopic(brand);
 
   if (!hasApiKey) {
-    return NextResponse.json({ post: fallbackPost(topic, keyword, brand), source: "fallback" });
+    return NextResponse.json({ post: fallbackPost(effTopic, keyword, brand), source: "fallback" });
   }
 
   const userMsg = [
     context ? `About this business (from their website):\n${context}\n` : "",
-    `Topic: ${topic}`,
-    `Target keyword: ${keyword || topic}`,
-    ``,
-    `Write the post as JSON.`,
+    auto ? `Choose the best topic and keywords for this business, then write the post as JSON.` : `Topic: ${topic}\nTarget keyword: ${keyword || topic}\n\nWrite the post as JSON.`,
   ].join("\n");
 
   try {
@@ -100,7 +111,7 @@ export async function POST(req: NextRequest) {
       model: MODEL,
       max_tokens: 4000,
       output_config: { effort: "medium" },
-      system: systemPrompt(brand, length),
+      system: systemPrompt(brand, length, Boolean(auto)),
       messages: [{ role: "user", content: userMsg }],
     });
     const raw = textOf(message).replace(/^```json\s*|\s*```$/g, "").trim();
@@ -108,12 +119,12 @@ export async function POST(req: NextRequest) {
     try {
       post = JSON.parse(raw);
     } catch {
-      return NextResponse.json({ post: fallbackPost(topic, keyword, brand), source: "fallback", note: "AI output could not be parsed; showing a template." });
+      return NextResponse.json({ post: fallbackPost(effTopic, keyword, brand), source: "fallback", note: "AI output could not be parsed; showing a template." });
     }
-    if (!post.slug) post.slug = slugify(post.title || topic);
+    if (!post.slug) post.slug = slugify(post.title || effTopic);
     return NextResponse.json({ post, source: "ai" });
   } catch (err) {
     if (err instanceof Anthropic.RateLimitError) return NextResponse.json({ error: "Rate limited — try again shortly." }, { status: 429 });
-    return NextResponse.json({ post: fallbackPost(topic, keyword, brand), source: "fallback" });
+    return NextResponse.json({ post: fallbackPost(effTopic, keyword, brand), source: "fallback" });
   }
 }
