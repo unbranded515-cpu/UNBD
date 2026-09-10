@@ -6,12 +6,21 @@ const isActive = (href: string) => path === href || (href !== '/' && path.starts
 <header class="sticky top-0 z-40 border-b border-charcoal/10 bg-cream/95 backdrop-blur supports-[backdrop-filter]:bg-cream/80">
   <div class="mx-auto flex max-w-content items-center justify-between gap-4 px-4 py-3 sm:px-6">
     <a href="/" class="flex items-center gap-2 text-charcoal" aria-label={`${site.name} home`}>
-      <span class="grid h-9 w-9 place-items-center rounded-lg bg-charcoal text-gold" aria-hidden="true">
-        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 22 9l-10 13L2 9z" /></svg>
-      </span>
-      <span class="flex flex-col leading-none">
-        <span class="text-base font-extrabold tracking-tight">Diamond Sofa</span>
-        <span class="text-[10px] font-medium uppercase tracking-[0.18em] text-muted">Kingston, ON</span>
+      <!-- Real logo; falls back to the mark + wordmark until /images/logo.png is uploaded. -->
+      <img
+        src="/images/logo.png"
+        alt={site.name}
+        class="h-12 w-auto sm:h-14"
+        onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"
+      />
+      <span class="hidden items-center gap-2 text-charcoal" style="display:none">
+        <span class="grid h-9 w-9 place-items-center rounded-lg bg-charcoal text-gold" aria-hidden="true">
+          <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 22 9l-10 13L2 9z" /></svg>
+        </span>
+        <span class="flex flex-col leading-none">
+          <span class="text-base font-extrabold tracking-tight">Diamond Sofa</span>
+          <span class="text-[10px] font-medium uppercase tracking-[0.18em] text-muted">Kingston, ON</span>
+        </span>
       </span>
     </a>
 

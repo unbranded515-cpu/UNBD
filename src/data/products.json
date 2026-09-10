@@ -126,7 +126,7 @@
     "inStock": true,
     "customSizes": true,
     "description": "Navy sectional with storage arms, USB and Type-C ports, cup holders and a pull-out bed.",
-    "image": "https://d8j0ntlcm91z4.cloudfront.net/user_34LqZFYxxERGB6v84OdOWgYjVrf/hf_20260910_031316_8e208e21-313b-4db0-952d-929da020000c.png",
+    "image": "/images/navy-sectional-sofa-bed.jpg",
     "tags": ["Storage arms", "USB + Type-C", "Pull-out bed"]
   },
   {
@@ -167,5 +167,31 @@
     "description": "Grey textured accent chair on a black metal frame. A comfy extra seat for any room.",
     "image": "https://d8j0ntlcm91z4.cloudfront.net/user_34LqZFYxxERGB6v84OdOWgYjVrf/hf_20260910_031316_70c5993b-ad89-4774-8a5a-4d0f5c8aa83d.png",
     "tags": ["Clearance", "Black metal frame"]
+  },
+  {
+    "id": "grey-sectional-sofa-bed",
+    "name": "Grey Sectional Sofa Bed",
+    "category": "sofas",
+    "price": null,
+    "compareAtPrice": null,
+    "clearance": false,
+    "inStock": true,
+    "customSizes": true,
+    "description": "Light grey sectional with a storage chaise, USB charging, cup holders and a pull-out bed.",
+    "image": "/images/grey-sectional-sofa-bed.jpg",
+    "tags": ["Storage chaise", "USB charging", "Pull-out bed"]
+  },
+  {
+    "id": "grey-reclining-sofa-loveseat",
+    "name": "Grey Power Reclining Sofa & Loveseat",
+    "category": "sofas",
+    "price": null,
+    "compareAtPrice": null,
+    "clearance": false,
+    "inStock": true,
+    "customSizes": false,
+    "description": "Grey power reclining sofa and loveseat with cup holders, storage consoles and USB charging.",
+    "image": "/images/grey-reclining-sofa-loveseat.jpg",
+    "tags": ["Power recline", "Cup holders", "USB charging"]
   }
 ]

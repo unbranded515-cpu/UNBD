@@ -6,10 +6,18 @@ const year = new Date().getFullYear();
   <div class="mx-auto grid max-w-content gap-10 px-4 py-14 sm:px-6 md:grid-cols-4">
     <div class="md:col-span-2">
       <div class="flex items-center gap-2">
-        <span class="grid h-9 w-9 place-items-center rounded-lg bg-gold text-charcoal" aria-hidden="true">
-          <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 22 9l-10 13L2 9z" /></svg>
+        <img
+          src="/images/logo.png"
+          alt={site.name}
+          class="h-16 w-auto"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"
+        />
+        <span class="hidden items-center gap-2" style="display:none">
+          <span class="grid h-9 w-9 place-items-center rounded-lg bg-gold text-charcoal" aria-hidden="true">
+            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 22 9l-10 13L2 9z" /></svg>
+          </span>
+          <span class="text-lg font-extrabold tracking-tight">Diamond Sofas MFG</span>
         </span>
-        <span class="text-lg font-extrabold tracking-tight">Diamond Sofas MFG</span>
       </div>
       <p class="mt-4 max-w-sm text-sm leading-relaxed text-cream/70">
         Family-owned furniture makers for 30 years. Sofas, beds, mattresses and dining sets
