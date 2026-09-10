@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { brand } from '../../data/site'
-import logoImg from '../../assets/logo-header.webp'
+import logoImg from '../../assets/logo-header.png'
 
 // Brand logo.
 //
