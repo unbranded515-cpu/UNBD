@@ -1,13 +1,14 @@
 import { useState } from 'react'
 import { brand } from '../../data/site'
-import logoImg from '../../assets/logo.webp'
+import logoImg from '../../assets/logo-header.webp'
 
 // Brand logo.
 //
-// Header (variant "dark", on the cream nav) uses the real logo image at
-// src/assets/logo.webp. The footer (variant "light", on dark green) keeps the
-// cream text wordmark, since the logo's light colours don't read on dark.
-// To change the logo, replace src/assets/logo.webp.
+// Header (variant "dark", on the green nav) uses logo-header.webp — the
+// uploaded logo recoloured to solid cream and thickened so its fine lines read
+// on dark green (the original logo.webp is a very faint dark-green line art).
+// The footer (variant "light") keeps the cream text wordmark.
+// To change the logo, replace src/assets/logo.webp and regenerate logo-header.webp.
 export default function Logo({ variant = 'dark', className = '' }) {
   const isLight = variant === 'light'
   const [imgOk, setImgOk] = useState(false)
