@@ -1,0 +1,143 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Placeholder from '../components/Placeholder.astro';
+import { site } from '../data/site';
+
+const steps = [
+  { n: 1, t: 'Pick a style you like', b: 'In the showroom or from our Instagram — anything on the floor can be made your way.' },
+  { n: 2, t: 'Tell us the size, fabric and colour', b: 'Give us the dimensions and the look you want. Not sure? We’ll help you measure.' },
+  { n: 3, t: 'We build it and deliver it', b: 'Made in-house in Kingston. Most custom orders are ready in 2–3 weeks.' },
+];
+---
+<BaseLayout
+  title="Custom Furniture Made in Kingston — Diamond Sofas MFG"
+  description="Custom sofas, sectionals and beds built to order in Kingston, Ontario — your size, fabric and colour. Ready in 2–3 weeks. Get a free quote. Call 647-210-9552."
+>
+  <section class="border-b border-charcoal/10 bg-paper">
+    <div class="container-x py-12 sm:py-16">
+      <p class="eyebrow">Custom furniture</p>
+      <h1 class="mt-2 max-w-3xl text-3xl font-extrabold tracking-tight text-charcoal sm:text-4xl lg:text-5xl">
+        Custom furniture, made in Kingston
+      </h1>
+      <p class="mt-4 max-w-2xl text-lg leading-relaxed text-muted">
+        Pick the piece you like, tell us your size, fabric and colour, and we build it in-house.
+        Most custom orders are ready in 2–3 weeks.
+      </p>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="section container-x">
+    <div class="grid gap-6 md:grid-cols-3">
+      {
+        steps.map((s) => (
+          <div class="rounded-xl2 bg-paper p-6 shadow-card">
+            <span class="grid h-10 w-10 place-items-center rounded-full bg-gold text-base font-bold text-white">{s.n}</span>
+            <h2 class="mt-4 text-lg font-semibold text-charcoal">{s.t}</h2>
+            <p class="mt-2 text-sm leading-relaxed text-muted">{s.b}</p>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- Quote form -->
+  <section class="bg-paper">
+    <div class="container-x grid gap-10 py-16 lg:grid-cols-2">
+      <div>
+        <h2 class="text-2xl font-extrabold tracking-tight text-charcoal sm:text-3xl">Get a custom quote</h2>
+        <p class="mt-3 text-muted">
+          Tell us what you're after. There's no cost and no obligation — we'll figure out the
+          price and timing with you.
+        </p>
+        <div class="mt-6 overflow-hidden rounded-xl2 shadow-card">
+          <Placeholder label="Fabric swatches / a finished custom sofa" src="/images/custom-swatches.jpg" ratio="4/3" rounded={false} />
+        </div>
+        <p class="mt-6 text-sm text-muted">
+          Prefer to talk? Call <a href={site.phoneHref} class="font-semibold text-gold-dark hover:text-gold">{site.phone}</a>
+          or message us on <a href={site.instagramUrl} class="font-semibold text-gold-dark hover:text-gold">Instagram</a>.
+        </p>
+      </div>
+
+      <!-- Netlify Forms: submissions email to the address set in the Netlify dashboard. -->
+      <form
+        name="custom-quote"
+        method="POST"
+        data-netlify="true"
+        netlify-honeypot="bot-field"
+        enctype="multipart/form-data"
+        action="/thank-you"
+        class="rounded-xl2 bg-cream p-6 shadow-card sm:p-8"
+      >
+        <input type="hidden" name="form-name" value="custom-quote" />
+        <p class="hidden">
+          <label>Don't fill this out if you're human: <input name="bot-field" /></label>
+        </p>
+
+        <div class="grid gap-5">
+          <div class="grid gap-5 sm:grid-cols-2">
+            <label class="flex flex-col gap-1.5 text-sm font-medium text-charcoal">
+              Name
+              <input type="text" name="name" required autocomplete="name" class="rounded-lg border border-charcoal/15 bg-paper px-3 py-2.5 text-sm" />
+            </label>
+            <label class="flex flex-col gap-1.5 text-sm font-medium text-charcoal">
+              Phone
+              <input type="tel" name="phone" required autocomplete="tel" class="rounded-lg border border-charcoal/15 bg-paper px-3 py-2.5 text-sm" />
+            </label>
+          </div>
+
+          <label class="flex flex-col gap-1.5 text-sm font-medium text-charcoal">
+            Email
+            <input type="email" name="email" autocomplete="email" class="rounded-lg border border-charcoal/15 bg-paper px-3 py-2.5 text-sm" />
+          </label>
+
+          <label class="flex flex-col gap-1.5 text-sm font-medium text-charcoal">
+            What are you looking for?
+            <select name="item_type" class="rounded-lg border border-charcoal/15 bg-paper px-3 py-2.5 text-sm">
+              <option>Sofa</option>
+              <option>Bed</option>
+              <option>Sectional</option>
+              <option>Dining set</option>
+              <option>Other</option>
+            </select>
+          </label>
+
+          <label class="flex flex-col gap-1.5 text-sm font-medium text-charcoal">
+            Approximate size
+            <input type="text" name="size" placeholder="e.g. 90&quot; wide sofa, king bed" class="rounded-lg border border-charcoal/15 bg-paper px-3 py-2.5 text-sm" />
+          </label>
+
+          <label class="flex flex-col gap-1.5 text-sm font-medium text-charcoal">
+            Fabric or colour preference
+            <input type="text" name="fabric_colour" placeholder="e.g. grey linen, brown leather" class="rounded-lg border border-charcoal/15 bg-paper px-3 py-2.5 text-sm" />
+          </label>
+
+          <label class="flex flex-col gap-1.5 text-sm font-medium text-charcoal">
+            Budget range
+            <select name="budget" class="rounded-lg border border-charcoal/15 bg-paper px-3 py-2.5 text-sm">
+              <option value="">Choose a range</option>
+              <option>Under $500</option>
+              <option>$500 – $1,000</option>
+              <option>$1,000 – $2,000</option>
+              <option>$2,000 – $3,000</option>
+              <option>$3,000+</option>
+            </select>
+          </label>
+
+          <label class="flex flex-col gap-1.5 text-sm font-medium text-charcoal">
+            Photo (optional)
+            <input type="file" name="photo" accept="image/*" class="rounded-lg border border-charcoal/15 bg-paper px-3 py-2 text-sm file:mr-3 file:rounded-md file:border-0 file:bg-charcoal file:px-3 file:py-1.5 file:text-xs file:font-semibold file:text-cream" />
+          </label>
+
+          <label class="flex flex-col gap-1.5 text-sm font-medium text-charcoal">
+            Message
+            <textarea name="message" rows="4" class="rounded-lg border border-charcoal/15 bg-paper px-3 py-2.5 text-sm"></textarea>
+          </label>
+
+          <button type="submit" class="btn-primary w-full">Send my request</button>
+          <p class="text-center text-xs text-muted">Thanks — Jai will call you within one business day.</p>
+        </div>
+      </form>
+    </div>
+  </section>
+</BaseLayout>

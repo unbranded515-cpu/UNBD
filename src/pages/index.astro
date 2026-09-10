@@ -1,0 +1,236 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Placeholder from '../components/Placeholder.astro';
+import ProductCard from '../components/ProductCard.astro';
+import { site } from '../data/site';
+import products from '../data/products.json';
+
+const clearance = products.filter((p) => p.clearance).slice(0, 8);
+
+const categories = [
+  { label: 'Sofas & Sectionals', href: '/sofas', img: '/images/cat-sofas.jpg' },
+  { label: 'Beds & Storage Beds', href: '/beds', img: '/images/cat-beds.jpg' },
+  { label: 'Mattresses', href: '/mattresses', img: '/images/cat-mattresses.jpg' },
+  { label: 'Dining & Tables', href: '/dining', img: '/images/cat-dining.jpg' },
+  { label: 'Clearance', href: '/clearance', img: '/images/cat-clearance.jpg' },
+  { label: 'Custom Builds', href: '/custom', img: '/images/cat-custom.jpg' },
+];
+
+const proof = [
+  {
+    title: 'Same-day delivery',
+    body: 'Order today, sleep on it tonight.',
+    icon: 'truck',
+  },
+  {
+    title: 'Factory pricing',
+    body: 'We make it, so you skip the markup.',
+    icon: 'tag',
+  },
+  {
+    title: 'Custom sizes & fabrics',
+    body: 'Built to fit your room, not the other way round.',
+    icon: 'ruler',
+  },
+  {
+    title: 'Open 7 days',
+    body: 'Unit 15, 1325 Centennial Dr, off Exit 611.',
+    icon: 'store',
+  },
+];
+
+const igPosts = [1, 2, 3, 4];
+---
+<BaseLayout
+  title="Diamond Sofas MFG — Furniture Store in Kingston, Ontario"
+  description="Factory-price sofas, beds, mattresses and dining sets in Kingston, Ontario. Same-day delivery, custom furniture built to order. Family-owned for 30 years. Call 647-210-9552."
+>
+  <!-- 1. Hero -->
+  <section class="relative">
+    <div class="absolute inset-0">
+      <Placeholder
+        label="Showroom sectional styled in a bright living room (full-width hero)"
+        src="/images/hero.jpg"
+        alt="Diamond Sofa sectional in a living room"
+        ratio="16/9"
+        rounded={false}
+        class="h-full w-full"
+      />
+      <div class="absolute inset-0 bg-gradient-to-r from-charcoal/85 via-charcoal/60 to-charcoal/20"></div>
+    </div>
+
+    <div class="container-x relative">
+      <div class="max-w-2xl py-20 sm:py-28 lg:py-36">
+        <p class="eyebrow text-gold-light">Kingston, Ontario · Open 7 days</p>
+        <h1 class="mt-4 text-4xl font-extrabold leading-[1.05] tracking-tight text-white sm:text-5xl lg:text-6xl">
+          Factory-price furniture. Delivered today.
+        </h1>
+        <p class="mt-5 max-w-xl text-lg leading-relaxed text-cream/90">
+          Sofas, beds, mattresses and dining sets made by a family that's been building
+          furniture for 30 years. Now in Kingston.
+        </p>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href="/clearance" class="btn-primary">Shop Clearance</a>
+          <a href="/showroom" class="btn-secondary bg-white/10 text-white border-white/30 hover:bg-white/20 hover:border-white/50">
+            Visit the Showroom
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. Category tiles -->
+  <section class="section container-x">
+    <div class="grid grid-cols-2 gap-4 sm:gap-5 lg:grid-cols-3">
+      {
+        categories.map((cat) => (
+          <a
+            href={cat.href}
+            class="group relative overflow-hidden rounded-xl2 bg-paper shadow-card transition-shadow hover:shadow-cardHover"
+          >
+            <Placeholder label={cat.label} src={cat.img} alt={cat.label} ratio="4/3" rounded={false} />
+            <div class="flex items-center justify-between gap-2 p-4">
+              <span class="text-base font-semibold text-charcoal">{cat.label}</span>
+              <span class="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-cream text-gold-dark transition-transform group-hover:translate-x-0.5">
+                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+              </span>
+            </div>
+          </a>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- 3. Proof row -->
+  <section class="border-y border-charcoal/10 bg-paper">
+    <div class="container-x grid grid-cols-1 gap-8 py-12 sm:grid-cols-2 lg:grid-cols-4">
+      {
+        proof.map((item) => (
+          <div class="flex gap-4">
+            <span class="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-cream text-gold-dark">
+              {item.icon === 'truck' && (
+                <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M3 6h11v9H3zM14 9h4l3 3v3h-7z" /><circle cx="7" cy="18" r="1.6" /><circle cx="17" cy="18" r="1.6" /></svg>
+              )}
+              {item.icon === 'tag' && (
+                <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M4 12V5a1 1 0 0 1 1-1h7l8 8-8 8z" /><circle cx="8.5" cy="8.5" r="1.3" /></svg>
+              )}
+              {item.icon === 'ruler' && (
+                <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M3 8 8 3l13 13-5 5zM8 8l2 2M11 5l2 2M5 11l2 2" /></svg>
+              )}
+              {item.icon === 'store' && (
+                <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M4 9h16v11H4zM4 9l1.5-5h13L20 9M9 20v-6h6v6" /></svg>
+              )}
+            </span>
+            <div>
+              <h3 class="font-semibold text-charcoal">{item.title}</h3>
+              <p class="mt-1 text-sm leading-relaxed text-muted">{item.body}</p>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- 4. Clearance highlights -->
+  <section class="section container-x">
+    <div class="flex flex-wrap items-end justify-between gap-4">
+      <div>
+        <p class="eyebrow">Clearance</p>
+        <h2 class="mt-2 text-3xl font-extrabold tracking-tight text-charcoal sm:text-4xl">
+          Up to 50% off floor models
+        </h2>
+      </div>
+      <a href="/clearance" class="text-sm font-semibold text-gold-dark hover:text-gold">See all clearance →</a>
+    </div>
+
+    <div class="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+      {clearance.map((product) => <ProductCard product={product} />)}
+    </div>
+  </section>
+
+  <!-- 5. Custom furniture -->
+  <section class="bg-paper">
+    <div class="container-x grid items-center gap-10 py-16 sm:py-20 lg:grid-cols-2">
+      <Placeholder
+        label="Fabric swatches and the workshop floor"
+        src="/images/custom-workshop.jpg"
+        alt="Fabric swatches in the Diamond Sofa workshop"
+        ratio="4/3"
+      />
+      <div>
+        <p class="eyebrow">Custom furniture</p>
+        <h2 class="mt-2 text-3xl font-extrabold tracking-tight text-charcoal sm:text-4xl">
+          Don't see your size? We'll build it.
+        </h2>
+        <p class="mt-4 text-lg leading-relaxed text-muted">
+          Pick the sofa or bed you like, tell us the dimensions and fabric, and we make it
+          in-house. Most custom orders are ready in 2–3 weeks.
+        </p>
+        <a href="/custom" class="btn-primary mt-6">Get a custom quote →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. Showroom block -->
+  <section class="section container-x">
+    <div class="grid items-stretch gap-8 lg:grid-cols-2">
+      <div class="overflow-hidden rounded-xl2 shadow-card">
+        <iframe
+          title="Map to Diamond Sofas MFG in Kingston"
+          src={site.mapEmbedUrl}
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          class="h-full min-h-[320px] w-full border-0"
+        ></iframe>
+      </div>
+      <div class="flex flex-col justify-center">
+        <p class="eyebrow">Visit the showroom</p>
+        <h2 class="mt-2 text-3xl font-extrabold tracking-tight text-charcoal sm:text-4xl">
+          Come sit on it before you buy.
+        </h2>
+        <p class="mt-3 text-lg text-muted">We're 2 minutes off the 401.</p>
+        <dl class="mt-6 space-y-3 text-charcoal">
+          <div class="flex gap-3">
+            <dt class="font-semibold">Address</dt>
+            <dd class="text-muted">{site.address.full} — {site.address.directions}</dd>
+          </div>
+          <div class="flex gap-3">
+            <dt class="font-semibold">Hours</dt>
+            <dd class="text-muted">{site.hours}</dd>
+          </div>
+          <div class="flex gap-3">
+            <dt class="font-semibold">Phone</dt>
+            <dd><a href={site.phoneHref} class="font-semibold text-gold-dark hover:text-gold">{site.phone}</a></dd>
+          </div>
+        </dl>
+        <div class="mt-6 flex flex-wrap gap-3">
+          <a href={site.mapsUrl} target="_blank" rel="noopener" class="btn-primary">Get directions</a>
+          <a href="/showroom" class="btn-secondary">Showroom details</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. Instagram strip -->
+  <section class="bg-paper">
+    <div class="container-x py-16 sm:py-20">
+      <div class="flex flex-wrap items-end justify-between gap-4">
+        <h2 class="text-2xl font-extrabold tracking-tight text-charcoal sm:text-3xl">
+          See what's on the floor this week
+        </h2>
+        <a href={site.instagramUrl} target="_blank" rel="noopener" class="text-sm font-semibold text-gold-dark hover:text-gold">
+          Follow {site.instagram} →
+        </a>
+      </div>
+      <div class="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-4">
+        {
+          igPosts.map((n) => (
+            <a href={site.instagramUrl} target="_blank" rel="noopener" class="group block overflow-hidden rounded-xl2 shadow-card transition-shadow hover:shadow-cardHover">
+              <Placeholder label={`Instagram post ${n} — this week's floor`} src={`/images/ig-${n}.jpg`} ratio="1/1" rounded={false} />
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</BaseLayout>
