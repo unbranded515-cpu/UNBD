@@ -2,18 +2,18 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Placeholder from '../components/Placeholder.astro';
 import ProductCard from '../components/ProductCard.astro';
-import { site } from '../data/site';
+import { site, images } from '../data/site';
 import products from '../data/products.json';
 
 const clearance = products.filter((p) => p.clearance).slice(0, 8);
 
 const categories = [
-  { label: 'Sofas & Sectionals', href: '/sofas', img: '/images/cat-sofas.jpg' },
-  { label: 'Beds & Storage Beds', href: '/beds', img: '/images/cat-beds.jpg' },
-  { label: 'Mattresses', href: '/mattresses', img: '/images/cat-mattresses.jpg' },
-  { label: 'Dining & Tables', href: '/dining', img: '/images/cat-dining.jpg' },
-  { label: 'Clearance', href: '/clearance', img: '/images/cat-clearance.jpg' },
-  { label: 'Custom Builds', href: '/custom', img: '/images/cat-custom.jpg' },
+  { label: 'Sofas & Sectionals', href: '/sofas', img: images.categories.sofas },
+  { label: 'Beds & Storage Beds', href: '/beds', img: images.categories.beds },
+  { label: 'Mattresses', href: '/mattresses', img: images.categories.mattresses },
+  { label: 'Dining & Tables', href: '/dining', img: images.categories.dining },
+  { label: 'Clearance', href: '/clearance', img: images.categories.clearance },
+  { label: 'Custom Builds', href: '/custom', img: images.categories.custom },
 ];
 
 const proof = [
@@ -50,7 +50,7 @@ const igPosts = [1, 2, 3, 4];
     <div class="absolute inset-0">
       <Placeholder
         label="Showroom sectional styled in a bright living room (full-width hero)"
-        src="/images/hero.jpg"
+        src={images.hero}
         alt="Diamond Sofa sectional in a living room"
         ratio="16/9"
         rounded={false}
@@ -153,7 +153,7 @@ const igPosts = [1, 2, 3, 4];
     <div class="container-x grid items-center gap-10 py-16 sm:py-20 lg:grid-cols-2">
       <Placeholder
         label="Fabric swatches and the workshop floor"
-        src="/images/custom-workshop.jpg"
+        src={images.customWorkshop}
         alt="Fabric swatches in the Diamond Sofa workshop"
         ratio="4/3"
       />
@@ -226,7 +226,7 @@ const igPosts = [1, 2, 3, 4];
         {
           igPosts.map((n) => (
             <a href={site.instagramUrl} target="_blank" rel="noopener" class="group block overflow-hidden rounded-xl2 shadow-card transition-shadow hover:shadow-cardHover">
-              <Placeholder label={`Instagram post ${n} — this week's floor`} src={`/images/ig-${n}.jpg`} ratio="1/1" rounded={false} />
+              <Placeholder label={`Instagram post ${n} — this week's floor`} src={images.instagram[n - 1]} ratio="1/1" rounded={false} />
             </a>
           ))
         }
