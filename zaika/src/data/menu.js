@@ -135,12 +135,17 @@ export const menu = {
 export const menuCategories = Object.keys(menu)
 
 // Home-page "Menu Highlights" — three featured dishes.
-// `image` is null for now → renders a styled placeholder. Swapping in a real
-// photo later is a one-line change (set `image` to an imported asset / URL).
+// Images are stock/placeholder food photography (see src/assets/README) — swap
+// for photos of the restaurant's actual dishes before launch. One-line change:
+// point `image` at a different imported asset or URL.
+import tandooriFish from '../assets/dish-tandoori-fish.webp'
+import malaiMomo from '../assets/dish-malai-momo.webp'
+import chickenBiryani from '../assets/dish-chicken-biryani.webp'
+
 export const menuHighlights = [
-  { name: 'Tandoori Fish', price: 16.99, image: null },
-  { name: 'Malai Momo (Non Veg)', price: 15.99, image: null },
-  { name: 'Chicken Biryani', price: 14.99, image: null },
+  { name: 'Tandoori Fish', price: 16.99, image: tandooriFish },
+  { name: 'Malai Momo (Non Veg)', price: 15.99, image: malaiMomo },
+  { name: 'Chicken Biryani', price: 14.99, image: chickenBiryani },
 ]
 
 // Consistent price formatting helper (CAD).

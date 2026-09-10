@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { about } from '../../data/site'
 import Reveal from '../ui/Reveal'
 import Placeholder from '../ui/Placeholder'
+import welcomeImg from '../../assets/welcome.webp'
 
 // Welcome / About section — text left, image right.
 export default function WelcomeSection() {
@@ -28,8 +29,8 @@ export default function WelcomeSection() {
         <Reveal delay={0.1}>
           <div className="relative">
             <Placeholder
-              alt="Inside Zaika on the Bay"
-              label="Restaurant photo coming soon"
+              src={welcomeImg}
+              alt="Warm interior of Zaika on the Bay"
               ratio="aspect-[4/5]"
               className="shadow-sm"
             />

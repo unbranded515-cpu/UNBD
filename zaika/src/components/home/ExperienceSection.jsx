@@ -2,6 +2,7 @@ import { experience } from '../../data/site'
 import Reveal from '../ui/Reveal'
 import Placeholder from '../ui/Placeholder'
 import Icon from '../ui/Icon'
+import experienceImg from '../../assets/experience.webp'
 
 // Experience section — feature blocks left, large photo right.
 export default function ExperienceSection() {
@@ -11,8 +12,8 @@ export default function ExperienceSection() {
         <Reveal className="order-2 lg:order-1">
           <div className="relative">
             <Placeholder
-              alt="Homestyle Indian cooking at Zaika on the Bay"
-              label="Kitchen photo coming soon"
+              src={experienceImg}
+              alt="Chef cooking over a flaming tandoor"
               ratio="aspect-[5/4]"
               className="shadow-sm"
             />

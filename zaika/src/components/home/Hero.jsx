@@ -1,10 +1,9 @@
 import { motion } from 'framer-motion'
 import { brand, contact, orderOnlineUrl } from '../../data/site'
+import heroImage from '../../assets/hero.webp'
 
-// Full-width hero. Uses a branded gradient + subtle food imagery placeholder.
-// To use a real hero photo, set `heroImage` to an imported asset / URL and it
-// renders behind the overlay (one-line change).
-const heroImage = null
+// Full-width hero. `heroImage` (stock food photography) renders behind a dark
+// overlay. Swap it for a real photo of the restaurant later — one-line change.
 
 export default function Hero() {
   return (
@@ -25,8 +24,14 @@ export default function Hero() {
           }}
         />
       )}
-      {/* Readability overlay */}
-      <div className="absolute inset-0 -z-10 bg-forest-800/40" />
+      {/* Readability overlay — darker on the left, where the text sits. */}
+      <div
+        className="absolute inset-0 -z-10"
+        style={{
+          backgroundImage:
+            'linear-gradient(90deg, rgba(15,38,29,0.85) 0%, rgba(15,38,29,0.6) 45%, rgba(15,38,29,0.35) 100%)',
+        }}
+      />
 
       <div className="container-x flex min-h-[78vh] flex-col items-start justify-center py-24 sm:min-h-[86vh]">
         <motion.p
