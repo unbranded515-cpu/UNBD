@@ -5,8 +5,8 @@ export const site = {
   phone: '647-210-9552',
   phoneHref: 'tel:+16472109552',
   email: 'diamondsofasmfg@gmail.com',
-  instagram: '@diamondsofasmfg',
-  instagramUrl: 'https://www.instagram.com/diamondsofasmfg/',
+  instagram: '@diamondsofas',
+  instagramUrl: 'https://www.instagram.com/diamondsofas/',
   domain: 'diamondsofasmfg.com',
   url: 'https://diamondsofasmfg.com',
   address: {
