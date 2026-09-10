@@ -38,13 +38,9 @@ export default function Navbar() {
 
   return (
     <header
-      className={`fixed inset-x-0 z-50 transition-all duration-300 ${
+      className={`fixed inset-x-0 z-50 border-b bg-cream/95 backdrop-blur transition-all duration-300 supports-[backdrop-filter]:bg-cream/80 ${
         announcement.enabled ? 'top-9' : 'top-0'
-      } ${
-        scrolled || open
-          ? 'border-b border-cream-300 bg-cream/95 backdrop-blur supports-[backdrop-filter]:bg-cream/80'
-          : 'bg-transparent'
-      }`}
+      } ${scrolled || open ? 'border-cream-300 shadow-sm' : 'border-transparent'}`}
     >
       <nav className="container-x flex h-20 items-center justify-between gap-4">
         {/* Logo */}

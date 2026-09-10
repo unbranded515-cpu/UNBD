@@ -1,52 +1,39 @@
 import { useState } from 'react'
 import { brand } from '../../data/site'
+import logoImg from '../../assets/logo.webp'
 
 // Brand logo.
 //
-// It automatically uses a real logo image the moment one exists — no code
-// change needed. Drop your file into the `public/` folder as:
-//   • public/logo.png        → used on dark backgrounds (the header/nav)
-//   • public/logo-dark.png   → optional, used on the dark-green footer.
-//     (If logo-dark.png is missing, logo.png is used there too.)
-// Transparent PNG or SVG works best. Until a file is present, the styled text
-// wordmark below is shown, so the build never breaks.
-//
-// `variant`: 'dark' = for cream backgrounds (nav); 'light' = for dark
-// backgrounds (footer).
+// Header (variant "dark", on the cream nav) uses the real logo image at
+// src/assets/logo.webp. The footer (variant "light", on dark green) keeps the
+// cream text wordmark, since the logo's light colours don't read on dark.
+// To change the logo, replace src/assets/logo.webp.
 export default function Logo({ variant = 'dark', className = '' }) {
   const isLight = variant === 'light'
-  // Start hidden: the text wordmark shows until the image actually loads, so a
-  // missing logo file never flashes a broken-image icon.
   const [imgOk, setImgOk] = useState(false)
-
-  // Prefer a footer-specific logo on dark backgrounds when provided.
-  const src = isLight ? '/logo-dark.png' : '/logo.png'
 
   const primary = isLight ? 'text-cream' : 'text-forest'
   const script = 'text-leaf'
   const handle = isLight ? 'text-cream/70' : 'text-forest/60'
 
-  return (
-    <span className={`inline-flex ${className}`} aria-label={brand.name}>
-      {/* Real logo image — shown once it loads; hidden (no broken icon) if absent. */}
-      <img
-        src={src}
-        alt={brand.name}
-        onLoad={() => setImgOk(true)}
-        onError={(e) => {
-          // On dark bg, fall back to the primary logo before giving up.
-          if (isLight && e.currentTarget.src.endsWith('/logo-dark.png')) {
-            e.currentTarget.src = '/logo.png'
-            return
-          }
-          setImgOk(false)
-        }}
-        className="h-12 w-auto"
-        style={{ display: imgOk ? 'block' : 'none' }}
-      />
+  const showText = isLight || !imgOk
 
-      {/* Text wordmark fallback */}
-      {!imgOk && (
+  return (
+    <span className={`inline-flex items-center ${className}`} aria-label={brand.name}>
+      {/* Real logo image — only on the header (dark variant). */}
+      {!isLight && (
+        <img
+          src={logoImg}
+          alt={brand.name}
+          onLoad={() => setImgOk(true)}
+          onError={() => setImgOk(false)}
+          className="h-11 w-auto sm:h-12"
+          style={{ display: imgOk ? 'block' : 'none' }}
+        />
+      )}
+
+      {/* Text wordmark fallback (and the footer logo) */}
+      {showText && (
         <span className="flex flex-col leading-none">
           <span className="flex items-baseline gap-1.5">
             <span className={`font-serif text-2xl font-bold tracking-[0.18em] ${primary}`}>
