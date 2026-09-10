@@ -2,6 +2,7 @@ import { contact, hours, orderOnlineUrl, social } from '../data/site'
 import PageHeader from '../components/ui/PageHeader'
 import Reveal from '../components/ui/Reveal'
 import Icon from '../components/ui/Icon'
+import CateringForm from '../components/CateringForm'
 
 // Google Maps embed for the address (no API key needed for this embed form).
 const mapSrc =
@@ -100,6 +101,24 @@ export default function Contact() {
                 allowFullScreen
               />
             </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* Catering inquiries */}
+      <section className="bg-cream-200 py-16 sm:py-20">
+        <div className="container-x">
+          <Reveal className="mx-auto max-w-2xl text-center">
+            <p className="eyebrow">Catering</p>
+            <h2 className="text-3xl font-bold text-ink sm:text-4xl">Catering Inquiries</h2>
+            <p className="mt-4 text-base leading-relaxed text-ink/70">
+              Planning a party, office lunch or celebration? Tell us about your event —
+              including your budget — and we’ll put together the right spread for you.
+            </p>
+          </Reveal>
+
+          <Reveal delay={0.1} className="mx-auto mt-10 max-w-3xl rounded-3xl border border-cream-300 bg-cream p-6 shadow-sm sm:p-9">
+            <CateringForm />
           </Reveal>
         </div>
       </section>

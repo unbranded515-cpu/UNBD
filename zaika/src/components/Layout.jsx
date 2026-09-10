@@ -1,7 +1,9 @@
 import { useEffect } from 'react'
 import { Outlet, useLocation } from 'react-router-dom'
+import AnnouncementBar from './AnnouncementBar'
 import Navbar from './Navbar'
 import Footer from './Footer'
+import { announcement } from '../data/site'
 
 // Scrolls to the top of the page on every route change.
 function ScrollToTop() {
@@ -16,9 +18,10 @@ export default function Layout() {
   return (
     <div className="flex min-h-screen flex-col">
       <ScrollToTop />
+      <AnnouncementBar />
       <Navbar />
-      {/* pt-20 offsets the fixed 5rem-tall navbar */}
-      <main className="flex-1 pt-20">
+      {/* Offset the fixed header: 5rem navbar, plus the 2.25rem announcement bar when enabled. */}
+      <main className={`flex-1 ${announcement.enabled ? 'pt-[7.25rem]' : 'pt-20'}`}>
         <Outlet />
       </main>
       <Footer />

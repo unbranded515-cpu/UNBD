@@ -70,6 +70,9 @@ const paths = {
   facebook: (
     <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
   ),
+  tiktok: (
+    <path d="M16 3c.3 2 1.7 3.6 4 4v3c-1.5 0-2.9-.4-4-1.2V15a5 5 0 1 1-5-5c.34 0 .67.03 1 .1v3.15A2 2 0 1 0 13 15V3h3z" />
+  ),
   arrowRight: (
     <>
       <path d="M5 12h14" />
@@ -94,8 +97,8 @@ const paths = {
   ),
 }
 
-// `star` and `quote` read better filled; the rest are stroke icons.
-const filledIcons = new Set(['star', 'quote'])
+// `star`, `quote` and `tiktok` read better filled; the rest are stroke icons.
+const filledIcons = new Set(['star', 'quote', 'tiktok'])
 
 export default function Icon({ name, size = 24, className = '', ...props }) {
   const isFilled = filledIcons.has(name)

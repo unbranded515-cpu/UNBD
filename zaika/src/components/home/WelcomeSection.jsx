@@ -21,6 +21,15 @@ export default function WelcomeSection() {
               <p key={i}>{para}</p>
             ))}
           </div>
+
+          {/* Locally owned / "not a franchise" story callout */}
+          <div className="mt-6 rounded-2xl border-l-4 border-leaf bg-cream-200 p-5">
+            <p className="mb-1 text-xs font-semibold uppercase tracking-[0.15em] text-leaf">
+              Locally Owned, Not a Franchise
+            </p>
+            <p className="text-base leading-relaxed text-ink/80">{about.story}</p>
+          </div>
+
           <Link to="/about" className="btn-primary mt-7">
             About Us
           </Link>

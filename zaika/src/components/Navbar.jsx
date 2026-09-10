@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
-import { navLinks, contact, orderOnlineUrl } from '../data/site'
+import { navLinks, contact, orderOnlineUrl, announcement } from '../data/site'
 import Logo from './ui/Logo'
 import Icon from './ui/Icon'
 
@@ -38,7 +38,9 @@ export default function Navbar() {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
+      className={`fixed inset-x-0 z-50 transition-all duration-300 ${
+        announcement.enabled ? 'top-9' : 'top-0'
+      } ${
         scrolled || open
           ? 'border-b border-cream-300 bg-cream/95 backdrop-blur supports-[backdrop-filter]:bg-cream/80'
           : 'bg-transparent'

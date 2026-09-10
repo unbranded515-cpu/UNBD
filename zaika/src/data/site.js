@@ -33,6 +33,16 @@ export const social = {
   instagram: { label: '@zaikaonthebay', url: 'https://www.instagram.com/zaikaonthebay' },
   // Facebook URL to be confirmed — placeholder to the search until the real page is provided.
   facebook: { label: 'Facebook', url: 'https://www.facebook.com/' },
+  // TODO(client): add the real TikTok handle/URL when available.
+  tiktok: { label: 'TikTok', url: 'https://www.tiktok.com/@zaikaonthebay' },
+}
+
+// Announcement bar shown above the header. Toggle with `enabled`.
+export const announcement = {
+  enabled: true,
+  // Short message — the address, linked to directions.
+  text: 'Now open at 37 Pinnacle St, Belleville — steps from the bay',
+  cta: 'Get Directions', // links to contact.directionsUrl
 }
 
 // Opening hours — order matters for display.
@@ -109,6 +119,9 @@ export const about = {
     'We blend authentic, homestyle Indian dishes with the global snacks people crave — steamed and fried momos, sizzling Indo-Chinese, stacked burgers and hand-rolled wraps — all made fresh to order.',
     'Find us just steps from the bay’s scenic waterfront in downtown Belleville. Whether you’re grabbing a quick bite or feeding the whole family, there’s a seat and a plate here for you.',
   ],
+  // Highlighted origin story — rendered as a callout on the home page.
+  story:
+    'We’re not a franchise — Zaika on the Bay is a locally owned restaurant, started by three friends who came to Belleville as students and made it their home. Every dish is cooked the way we’d make it for our own family.',
 }
 
 // Experience section feature blocks.
@@ -151,4 +164,15 @@ export const testimonials = [
     author: 'Placeholder Review',
     location: 'Belleville, ON',
   },
+]
+
+// Catering inquiry — budget ranges people can pick from so they can tell us
+// their budget up front. Edit freely (CAD).
+export const cateringBudgets = [
+  'Under $500',
+  '$500 – $1,000',
+  '$1,000 – $2,500',
+  '$2,500 – $5,000',
+  '$5,000+',
+  'Not sure yet',
 ]

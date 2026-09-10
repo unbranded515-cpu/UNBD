@@ -38,6 +38,15 @@ export default function Footer() {
             >
               <Icon name="facebook" size={18} />
             </a>
+            <a
+              href={social.tiktok.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="TikTok"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-cream/25 text-cream transition-colors hover:bg-cream hover:text-forest"
+            >
+              <Icon name="tiktok" size={18} />
+            </a>
           </div>
         </div>
 
