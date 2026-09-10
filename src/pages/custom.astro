@@ -1,7 +1,23 @@
 ---
+import fs from 'node:fs';
+import path from 'node:path';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Placeholder from '../components/Placeholder.astro';
 import { site, images } from '../data/site';
+
+// Auto-load every image dropped into /public/images/custom (any filename).
+// The gallery section only renders when there is at least one photo.
+let customGallery: string[] = [];
+try {
+  const dir = path.join(process.cwd(), 'public', 'images', 'custom');
+  customGallery = fs
+    .readdirSync(dir)
+    .filter((f) => /\.(jpe?g|png|webp|avif|gif)$/i.test(f))
+    .sort()
+    .map((f) => `/images/custom/${f}`);
+} catch {
+  // folder not created yet — leave the gallery empty
+}
 
 const steps = [
   { n: 1, t: 'Pick a style you like', b: 'In the showroom or from our Instagram — anything on the floor can be made your way.' },
@@ -41,8 +57,38 @@ const steps = [
     </div>
   </section>
 
+  <!-- Recent custom builds gallery (auto-loads from /public/images/custom) -->
+  {
+    customGallery.length > 0 && (
+      <section class="section container-x">
+        <p class="eyebrow">Our work</p>
+        <h2 class="mt-2 text-3xl font-extrabold tracking-tight text-charcoal sm:text-4xl">
+          Recent custom builds
+        </h2>
+        <p class="mt-4 max-w-2xl text-lg leading-relaxed text-muted">
+          Real pieces we've built for customers in our Kingston workshop — your size,
+          your fabric, your colour. Yours could be next.
+        </p>
+        <div class="mt-8 gap-4 [column-fill:_balance] columns-2 sm:columns-3 lg:columns-4">
+          {customGallery.map((src, i) => (
+            <img
+              src={src}
+              alt={`Custom furniture built by Diamond Sofas MFG in Kingston — example ${i + 1}`}
+              loading="lazy"
+              decoding="async"
+              class="mb-4 w-full rounded-xl2 shadow-card"
+            />
+          ))}
+        </div>
+        <div class="mt-8">
+          <a href="#quote" class="btn-primary">Start your custom quote →</a>
+        </div>
+      </section>
+    )
+  }
+
   <!-- Quote form -->
-  <section class="bg-paper">
+  <section id="quote" class="bg-paper">
     <div class="container-x grid gap-10 py-16 lg:grid-cols-2">
       <div>
         <h2 class="text-2xl font-extrabold tracking-tight text-charcoal sm:text-3xl">Get a custom quote</h2>
