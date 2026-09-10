@@ -17,7 +17,7 @@ export default function Footer() {
         <div className="space-y-5">
           <Logo variant="light" />
           <p className="max-w-xs text-sm leading-relaxed text-cream/70">
-            {brand.tagline}. Authentic Indian & global snacks, made fresh in downtown Belleville.
+            {brand.tagline}. Authentic Indian & global snacks, made fresh in Belleville.
           </p>
           <div className="flex items-center gap-3">
             <a

@@ -12,9 +12,11 @@ export default function Logo({ variant = 'dark', className = '' }) {
   const isLight = variant === 'light'
   const [imgOk, setImgOk] = useState(false)
 
-  const primary = isLight ? 'text-cream' : 'text-forest'
+  // Both the header (green) and footer (dark green) sit on dark grounds now,
+  // so the text-wordmark fallback uses cream in both variants.
+  const primary = 'text-cream'
   const script = 'text-leaf'
-  const handle = isLight ? 'text-cream/70' : 'text-forest/60'
+  const handle = 'text-cream/70'
 
   const showText = isLight || !imgOk
 
@@ -27,7 +29,7 @@ export default function Logo({ variant = 'dark', className = '' }) {
           alt={brand.name}
           onLoad={() => setImgOk(true)}
           onError={() => setImgOk(false)}
-          className="h-11 w-auto sm:h-12"
+          className="h-12 w-auto sm:h-14"
           style={{ display: imgOk ? 'block' : 'none' }}
         />
       )}

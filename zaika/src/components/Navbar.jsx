@@ -32,15 +32,22 @@ export default function Navbar() {
   }, [open])
 
   const linkClass = ({ isActive }) =>
-    `text-sm font-medium transition-colors hover:text-forest ${
-      isActive ? 'text-forest' : 'text-ink/80'
+    `text-sm font-medium transition-colors hover:text-white ${
+      isActive ? 'text-white' : 'text-cream/75'
     }`
+
+  // Header sits on dark forest green, so the CTAs use cream-on-green styling
+  // rather than the global (forest-on-cream) btn-primary / btn-outline.
+  const ctaSolid =
+    'inline-flex items-center justify-center gap-2 rounded-full bg-cream px-6 py-3 text-sm font-semibold text-forest transition-colors duration-200 hover:bg-white'
+  const ctaOutline =
+    'inline-flex items-center justify-center gap-2 rounded-full border border-cream/50 bg-transparent px-6 py-3 text-sm font-semibold text-cream transition-colors duration-200 hover:bg-cream hover:text-forest'
 
   return (
     <header
-      className={`fixed inset-x-0 z-50 border-b bg-cream/95 backdrop-blur transition-all duration-300 supports-[backdrop-filter]:bg-cream/80 ${
+      className={`fixed inset-x-0 z-50 border-b bg-forest transition-all duration-300 ${
         announcement.enabled ? 'top-9' : 'top-0'
-      } ${scrolled || open ? 'border-cream-300 shadow-sm' : 'border-transparent'}`}
+      } ${scrolled || open ? 'border-forest-800 shadow-md shadow-forest/20' : 'border-transparent'}`}
     >
       <nav className="container-x flex h-20 items-center justify-between gap-4">
         {/* Logo */}
@@ -63,17 +70,17 @@ export default function Navbar() {
         <div className="hidden items-center gap-4 lg:flex">
           <a
             href={`tel:${contact.phonePrimary.replace(/[^\d+]/g, '')}`}
-            className="flex items-center gap-2 text-sm font-semibold text-forest hover:text-forest-700"
+            className="flex items-center gap-2 text-sm font-semibold text-cream hover:text-white"
           >
             <Icon name="phone" size={16} />
             {contact.phonePrimary}
           </a>
-          <a href={orderOnlineUrl} className="btn-primary" target="_blank" rel="noopener noreferrer">
+          <a href={orderOnlineUrl} className={ctaSolid} target="_blank" rel="noopener noreferrer">
             Order Online
           </a>
           <a
             href={contact.directionsUrl}
-            className="btn-outline"
+            className={ctaOutline}
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -85,7 +92,7 @@ export default function Navbar() {
         <div className="flex items-center gap-2 lg:hidden">
           <a
             href={`tel:${contact.phonePrimary.replace(/[^\d+]/g, '')}`}
-            className="p-2 text-forest"
+            className="p-2 text-cream"
             aria-label={`Call ${contact.phonePrimary}`}
           >
             <Icon name="phone" size={20} />
@@ -93,7 +100,7 @@ export default function Navbar() {
           <button
             type="button"
             onClick={() => setOpen((v) => !v)}
-            className="p-2 text-forest"
+            className="p-2 text-cream"
             aria-label={open ? 'Close menu' : 'Open menu'}
             aria-expanded={open}
           >
@@ -104,7 +111,7 @@ export default function Navbar() {
 
       {/* Mobile drawer */}
       <div
-        className={`overflow-hidden border-t border-cream-300 bg-cream transition-[max-height] duration-300 ease-out lg:hidden ${
+        className={`overflow-hidden border-t border-forest-800 bg-forest transition-[max-height] duration-300 ease-out lg:hidden ${
           open ? 'max-h-[80vh]' : 'max-h-0'
         }`}
       >
@@ -116,7 +123,7 @@ export default function Navbar() {
                 end={link.to === '/'}
                 className={({ isActive }) =>
                   `block rounded-lg px-3 py-3 text-base font-medium transition-colors ${
-                    isActive ? 'bg-cream-200 text-forest' : 'text-ink/80 hover:bg-cream-200'
+                    isActive ? 'bg-forest-700 text-white' : 'text-cream/80 hover:bg-forest-700'
                   }`
                 }
               >
@@ -127,7 +134,7 @@ export default function Navbar() {
           <li className="mt-3 flex flex-col gap-3 px-1">
             <a
               href={orderOnlineUrl}
-              className="btn-primary w-full"
+              className={`${ctaSolid} w-full`}
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -135,7 +142,7 @@ export default function Navbar() {
             </a>
             <a
               href={contact.directionsUrl}
-              className="btn-outline w-full"
+              className={`${ctaOutline} w-full`}
               target="_blank"
               rel="noopener noreferrer"
             >
