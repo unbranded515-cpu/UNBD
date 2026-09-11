@@ -305,100 +305,95 @@ function sky(g, ox, oy, w, h) {
   g.fillEllipse(ox + 402, oy + 92, 120, 46);
 }
 
-/** Kingston limestone block buildings. */
-function limestone(g, ox, oy, w, h) {
-  const blocks = [
-    { x: 0, w: 96, top: 26 },
-    { x: 96, w: 74, top: 62 },
-    { x: 170, w: 110, top: 10 },
-    { x: 280, w: 82, top: 48 },
-    { x: 362, w: 118, top: 30 },
-  ];
+/**
+ * A three-quarter view building block, drawn so its roof line falls away
+ * toward the far end. The near (tall) edge is on the right; Buildings.js
+ * mirrors the sprite for the opposite side of the street.
+ */
+function buildingBlock(g, ox, oy, w, h, wall, wallShade, trim, awning) {
+  const farTop = oy + h * 0.34;
 
-  for (const b of blocks) {
-    const bx = ox + b.x;
-    const by = oy + b.top;
-    const bh = h - b.top;
+  // Facade, receding to the left.
+  g.fillStyle(wall, 1);
+  g.fillPoints(
+    [
+      { x: ox, y: farTop },
+      { x: ox + w, y: oy },
+      { x: ox + w, y: oy + h },
+      { x: ox, y: oy + h },
+    ],
+    true
+  );
 
-    g.fillStyle(LIMESTONE, 1);
-    g.fillRect(bx, by, b.w, bh);
-    g.fillStyle(LIMESTONE_DARK, 1);
-    g.fillRect(bx + b.w - 5, by, 5, bh);
-    g.fillRect(bx, by, b.w, 7);
+  // Cornice along the roofline.
+  g.fillStyle(trim, 1);
+  g.fillPoints(
+    [
+      { x: ox, y: farTop },
+      { x: ox + w, y: oy },
+      { x: ox + w, y: oy + h * 0.055 },
+      { x: ox, y: farTop + h * 0.04 },
+    ],
+    true
+  );
 
-    // Course lines in the stone.
-    g.fillStyle(0xb5ad9a, 0.6);
-    for (let y = by + 18; y < oy + h; y += 22) {
-      g.fillRect(bx, y, b.w - 5, 2);
-    }
+  // Window grid, shrinking and rising toward the far end.
+  const cols = 5;
+  for (let c = 0; c < cols; c += 1) {
+    const t0 = c / cols;
+    const t1 = (c + 0.62) / cols;
+    const x0 = ox + w * t0;
+    const x1 = ox + w * t1;
+    const top0 = farTop + (oy - farTop) * t0;
+    const top1 = farTop + (oy - farTop) * t1;
 
-    // Windows.
-    g.fillStyle(0x51606c, 1);
-    for (let wy = by + 24; wy < oy + h - 30; wy += 46) {
-      for (let wx = bx + 12; wx < bx + b.w - 24; wx += 34) {
-        g.fillRect(wx, wy, 20, 28);
-        g.fillStyle(0x6d8496, 1);
-        g.fillRect(wx, wy, 20, 9);
-        g.fillStyle(0x51606c, 1);
-      }
+    for (let row = 0; row < 2; row += 1) {
+      const yOff = h * (0.16 + row * 0.24);
+      const winH = h * 0.15 * (0.72 + t0 * 0.4);
+      g.fillStyle(wallShade, 1);
+      g.fillPoints(
+        [
+          { x: x0, y: top0 + yOff },
+          { x: x1, y: top1 + yOff },
+          { x: x1, y: top1 + yOff + winH },
+          { x: x0, y: top0 + yOff + winH },
+        ],
+        true
+      );
+      g.fillStyle(0x8fa7b5, 0.55);
+      g.fillPoints(
+        [
+          { x: x0, y: top0 + yOff },
+          { x: x1, y: top1 + yOff },
+          { x: x1, y: top1 + yOff + winH * 0.3 },
+          { x: x0, y: top0 + yOff + winH * 0.3 },
+        ],
+        true
+      );
     }
   }
+
+  // Ground-floor shopfront with a blank sign board and an awning.
+  g.fillStyle(0x2f3a42, 1);
+  g.fillRect(ox, oy + h * 0.74, w, h * 0.26);
+  g.fillStyle(awning, 1);
+  g.fillRect(ox, oy + h * 0.7, w, h * 0.06);
+  g.fillStyle(trim, 1);
+  g.fillRect(ox, oy + h * 0.64, w, h * 0.06);
+
+  // Near corner edge, to read the volume.
+  g.fillStyle(wallShade, 0.5);
+  g.fillRect(ox + w - Math.max(3, w * 0.03), oy, Math.max(3, w * 0.03), h);
 }
 
-/** Storefront row with awnings in the brand colours. */
-function storefronts(g, ox, oy, w, h) {
-  const shops = [0, 96, 192, 288, 384];
-
-  g.fillStyle(0xb9b1a0, 1);
-  g.fillRect(ox, oy, w, h);
-
-  shops.forEach((sx, i) => {
-    const x = ox + sx;
-    const sw = 96;
-
-    g.fillStyle(i % 2 === 0 ? 0xd5cdbc : 0xc6bdab, 1);
-    g.fillRect(x, oy, sw - 4, h);
-
-    // Window and door.
-    g.fillStyle(0x33444f, 1);
-    g.fillRect(x + 8, oy + 54, sw - 40, h - 66);
-    g.fillStyle(0x445a68, 1);
-    g.fillRect(x + 10, oy + 56, sw - 44, 20);
-    g.fillStyle(0x4a3a2c, 1);
-    g.fillRect(x + sw - 28, oy + 50, 20, h - 56);
-
-    // Awning — alternating brand green / orange.
-    const awning = i % 2 === 0 ? BRAND.green : BRAND.orange;
-    const awningDark = i % 2 === 0 ? BRAND.greenDark : BRAND.orangeDark;
-    g.fillStyle(awningDark, 1);
-    g.fillRect(x + 2, oy + 30, sw - 8, 22);
-    g.fillStyle(awning, 1);
-    for (let s = 0; s < 5; s += 1) {
-      g.fillRect(x + 4 + s * 18, oy + 30, 9, 22);
-    }
-
-    // Sign board (blank — real signage comes with the final art).
-    g.fillStyle(0x2f3a42, 1);
-    g.fillRect(x + 6, oy + 10, sw - 16, 18);
-  });
+/** Kingston limestone block. */
+function buildingA(g, ox, oy, w, h) {
+  buildingBlock(g, ox, oy, w, h, LIMESTONE, LIMESTONE_DARK, 0xe8e3d6, 0x1ba37e);
 }
 
-/** Concrete sidewalk slabs with a curb. */
-function sidewalk(g, ox, oy, w, h) {
-  g.fillStyle(CONCRETE, 1);
-  g.fillRect(ox, oy, w, h);
-
-  g.fillStyle(0xc3bfb6, 1);
-  for (let x = 0; x < w; x += 60) {
-    g.fillRect(ox + x, oy, 3, h - 14);
-  }
-  g.fillRect(ox, oy + h - 30, w, 2);
-
-  // Curb.
-  g.fillStyle(0xa9a49a, 1);
-  g.fillRect(ox, oy + h - 14, w, 14);
-  g.fillStyle(0x8f8a80, 1);
-  g.fillRect(ox, oy + h - 5, w, 5);
+/** Painted brick storefront. */
+function buildingB(g, ox, oy, w, h) {
+  buildingBlock(g, ox, oy, w, h, 0xa9614a, 0x8a4a36, 0xe8e3d6, 0xf2802b);
 }
 
 /**
@@ -481,9 +476,8 @@ const PAINTERS = {
   tree,
   pylon,
   sky,
-  limestone,
-  storefronts,
-  sidewalk,
+  buildingA,
+  buildingB,
   road,
 };
 

@@ -91,6 +91,27 @@ export const DIFFICULTY = {
 };
 
 /**
+ * The buildings lining the street. They ride the same depth system as the
+ * gameplay objects, so they sweep past the camera instead of sliding
+ * sideways the way a flat backdrop would.
+ */
+export const BUILDINGS = {
+  textures: ['bg-building-a', 'bg-building-b'],
+  /** Depth between consecutive buildings on one side of the street. */
+  spacing: 0.135,
+  /** Distance from the kerb to the facade, in depth-1 pixels. */
+  setback: 16,
+  /** Base scale applied on top of the perspective scale. */
+  sizeMul: 1.18,
+  /** Per-building random size variation, so the row isn't uniform. */
+  sizeJitter: [0.8, 1.26],
+  /** Depth over which a building fades up from the horizon haze. */
+  fadeInDepth: 0.22,
+  /** Recycled earlier than road objects — they leave the frame sooner. */
+  despawnDepth: 1.3,
+};
+
+/**
  * Obstacle types. `lowProfile: true` means a jump clears it.
  * Cars and trees are tall — they always end the run, exactly as specified.
  */
