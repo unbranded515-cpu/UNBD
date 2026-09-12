@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Smooth in-page anchor scrolling for the showroom/directions jumps. */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Reusable section rhythm + container helpers. */
+@layer components {
+  .container-x {
+    @apply mx-auto w-full max-w-content px-4 sm:px-6;
+  }
+  .section {
+    @apply py-16 sm:py-20;
+  }
+  .eyebrow {
+    @apply text-xs font-semibold uppercase tracking-[0.18em] text-gold-dark;
+  }
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-gold px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-gold-dark;
+  }
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-charcoal/20 bg-paper px-6 py-3 text-sm font-semibold text-charcoal transition-colors hover:border-charcoal/40 hover:bg-cream;
+  }
+}
