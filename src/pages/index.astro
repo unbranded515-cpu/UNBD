@@ -8,12 +8,20 @@ import products from '../data/products.json';
 const clearance = products.filter((p) => p.clearance).slice(0, 8);
 
 const categories = [
-  { label: 'Sofas & Sectionals', href: '/sofas', img: images.categories.sofas },
-  { label: 'Beds & Storage Beds', href: '/beds', img: images.categories.beds },
-  { label: 'Mattresses', href: '/mattresses', img: images.categories.mattresses },
+  { label: 'Sofas & Sectionals', href: '/sofas', img: '/images/products/cloud-5pc-sectional-suite.jpg' },
+  { label: 'Beds & Storage Beds', href: '/beds', img: '/images/products/riverside-queen-bed.jpg' },
+  { label: 'Mattresses', href: '/mattresses', img: '/images/products/single-bed-mattress-bundle.jpg' },
   { label: 'Dining & Tables', href: '/dining', img: images.categories.dining },
-  { label: 'Clearance', href: '/clearance', img: images.categories.clearance },
-  { label: 'Custom Builds', href: '/custom', img: images.categories.custom },
+  { label: 'Clearance', href: '/clearance', img: '/images/products/venice-sofa.jpg' },
+  { label: 'Custom Builds', href: '/custom', img: '/images/custom/a18be1ab-0c73-47d8-bc57-688afe72a84a.jpg' },
+];
+
+// Real custom-build photos for the "See what's on the floor" strip.
+const floorPhotos = [
+  '/images/custom/IMG_1576.jpg',
+  '/images/custom/9be22e7c-ed88-428d-9010-c06880fc22cb.jpg',
+  '/images/custom/IMG_8990.jpg',
+  '/images/custom/2657219245028468650.jpg',
 ];
 
 const proof = [
@@ -39,7 +47,6 @@ const proof = [
   },
 ];
 
-const igPosts = [1, 2, 3, 4];
 ---
 <BaseLayout
   title="Diamond Sofas MFG — Furniture Store in Kingston, Ontario"
@@ -224,9 +231,9 @@ const igPosts = [1, 2, 3, 4];
       </div>
       <div class="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-4">
         {
-          igPosts.map((n) => (
+          floorPhotos.map((src, i) => (
             <a href={site.instagramUrl} target="_blank" rel="noopener" class="group block overflow-hidden rounded-xl2 shadow-card transition-shadow hover:shadow-cardHover">
-              <Placeholder label={`Instagram post ${n} — this week's floor`} src={images.instagram[n - 1]} ratio="1/1" rounded={false} />
+              <Placeholder label={`On the floor this week ${i + 1}`} src={src} ratio="1/1" rounded={false} />
             </a>
           ))
         }
