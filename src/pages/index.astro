@@ -1,4 +1,6 @@
 ---
+import fs from 'node:fs';
+import path from 'node:path';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Placeholder from '../components/Placeholder.astro';
 import ProductCard from '../components/ProductCard.astro';
@@ -6,6 +8,19 @@ import { site, images } from '../data/site';
 import products from '../data/products.json';
 
 const clearance = products.filter((p) => p.clearance).slice(0, 8);
+
+// Patio & Outdoor: auto-load every photo dropped into /public/images/patio.
+let patioPhotos: string[] = [];
+try {
+  const dir = path.join(process.cwd(), 'public', 'images', 'patio');
+  patioPhotos = fs
+    .readdirSync(dir)
+    .filter((f) => /\.(jpe?g|png|webp|avif|gif)$/i.test(f))
+    .sort()
+    .map((f) => `/images/patio/${f}`);
+} catch {
+  // folder not created yet
+}
 
 const categories = [
   { label: 'Sofas & Sectionals', href: '/sofas', img: '/images/products/cloud-5pc-sectional-suite.jpg' },
@@ -152,6 +167,63 @@ const proof = [
 
     <div class="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
       {clearance.map((product) => <ProductCard product={product} />)}
+    </div>
+  </section>
+
+  <!-- 4b. Patio & Outdoor — unbeatable prices -->
+  <section class="bg-charcoal text-cream">
+    <div class="container-x py-16 sm:py-20">
+      <div class="grid items-center gap-10 lg:grid-cols-2">
+        <div>
+          <p class="eyebrow text-gold-light">New — Patio &amp; Outdoor</p>
+          <h2 class="mt-2 text-3xl font-extrabold tracking-tight sm:text-4xl">
+            Patio sets at a fraction of the price
+          </h2>
+          <p class="mt-4 max-w-xl text-lg leading-relaxed text-cream/80">
+            Designer outdoor dining and lounge sets, priced to clear — cast aluminum,
+            wicker and sling. Just arrived, and going fast.
+          </p>
+
+          <!-- Value hook -->
+          <div class="mt-6 inline-flex flex-wrap items-center gap-x-4 gap-y-1 rounded-xl2 bg-cream/10 px-5 py-4">
+            <span class="text-sm uppercase tracking-wide text-cream/60">Sold elsewhere</span>
+            <span class="text-xl font-semibold text-cream/60 line-through">$6,000</span>
+            <span class="text-cream/40">→</span>
+            <span class="text-sm uppercase tracking-wide text-gold-light">Our price</span>
+            <span class="text-3xl font-extrabold text-white">$1,200</span>
+          </div>
+
+          <div class="mt-8 flex flex-wrap gap-3">
+            <a href={site.phoneHref} class="btn-primary">
+              <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.24 11.4 11.4 0 0 0 3.6.58 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.4 11.4 0 0 0 .58 3.6 1 1 0 0 1-.24 1z" /></svg>
+              Call {site.phone}
+            </a>
+            <a href="/showroom" class="btn-secondary bg-white/10 text-white border-white/30 hover:bg-white/20 hover:border-white/50">
+              See it in the showroom
+            </a>
+          </div>
+        </div>
+
+        <div>
+          {
+            patioPhotos.length > 0 ? (
+              <div class="grid grid-cols-2 gap-4">
+                {patioPhotos.slice(0, 4).map((src, i) => (
+                  <img
+                    src={src}
+                    alt={`Patio and outdoor furniture at Diamond Sofas MFG in Kingston — ${i + 1}`}
+                    loading="lazy"
+                    decoding="async"
+                    class="aspect-square w-full rounded-xl2 object-cover shadow-cardHover"
+                  />
+                ))}
+              </div>
+            ) : (
+              <Placeholder label="Patio & outdoor sets (drop photos into /public/images/patio)" ratio="4/3" />
+            )
+          }
+        </div>
+      </div>
     </div>
   </section>
 
