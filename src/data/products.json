@@ -317,8 +317,8 @@
     ]
   },
   {
-    "id": "kendal-sofa-loveseat",
-    "name": "Kendal Sofa + Loveseat",
+    "id": "ella-sofa-loveseat",
+    "name": "Ella Sofa + Loveseat",
     "category": "sofas",
     "price": 1299,
     "compareAtPrice": 2199,
@@ -326,7 +326,7 @@
     "inStock": true,
     "customSizes": false,
     "description": "Canadian-made sofa and loveseat with a solid wood frame.",
-    "image": "/images/products/kendal-sofa-loveseat.jpg",
+    "image": "/images/products/ella-sofa-loveseat.jpg",
     "tags": [
       "Clearance",
       "Sofa + loveseat",
