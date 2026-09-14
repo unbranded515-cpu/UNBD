@@ -1,19 +1,20 @@
 [
   {
     "id": "storage-bed-queen",
-    "name": "Queen Storage Bed Frame",
+    "name": "Canadian Made Queen Size Storage Bedroom Set",
     "category": "beds",
-    "price": 399,
+    "price": 1599,
     "compareAtPrice": null,
     "clearance": false,
     "inStock": true,
     "customSizes": true,
-    "description": "Solid wood frame with storage built into the base. Any size, any colour.",
+    "description": "Canadian-made bedroom set with two large front drawers and rear open storage. Set includes queen bed, dresser plus mirror, chest and one nightstand. Available in 10 different colours and sizes.",
     "image": "/images/products/storage-bed-queen.jpg",
     "tags": [
-      "Solid wood",
-      "Custom sizes",
-      "No box spring needed"
+      "Canadian made",
+      "Bedroom set",
+      "Front drawers + rear storage",
+      "10 colours & sizes"
     ]
   },
   {
