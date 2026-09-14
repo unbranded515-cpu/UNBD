@@ -98,19 +98,20 @@
   },
   {
     "id": "navy-sectional-sofa-bed",
-    "name": "Navy Sectional Sofa Bed",
+    "name": "Chase Sofa Bed",
     "category": "sofas",
-    "price": null,
+    "price": 799,
     "compareAtPrice": null,
     "clearance": false,
     "inStock": true,
     "customSizes": true,
-    "description": "Navy sectional with storage arms, USB and Type-C ports, cup holders and a pull-out bed.",
+    "description": "Sofa bed with built-in USB charging plus cup holders. Converts into a double-size bed. Available in light grey and dark grey.",
     "image": "/images/navy-sectional-sofa-bed.jpg",
     "tags": [
-      "Storage arms",
-      "USB + Type-C",
-      "Pull-out bed"
+      "USB charging",
+      "Cup holders",
+      "Converts to double bed",
+      "Light & dark grey"
     ]
   },
   {
@@ -131,19 +132,21 @@
   },
   {
     "id": "grey-sectional-sofa-bed",
-    "name": "Grey Sectional Sofa Bed",
+    "name": "Ethan Sectional Sofa Bed",
     "category": "sofas",
-    "price": null,
+    "price": 899,
     "compareAtPrice": null,
     "clearance": false,
     "inStock": true,
     "customSizes": true,
-    "description": "Light grey sectional with a storage chaise, USB charging, cup holders and a pull-out bed.",
+    "description": "Sectional sofa bed with built-in USB charging plus cup holders. Hidden storage in the chaise, pulls out into a bed. Available in light grey and dark grey.",
     "image": "/images/grey-sectional-sofa-bed.jpg",
     "tags": [
-      "Storage chaise",
       "USB charging",
-      "Pull-out bed"
+      "Cup holders",
+      "Hidden chaise storage",
+      "Pulls out into bed",
+      "Light & dark grey"
     ]
   },
   {
