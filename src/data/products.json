@@ -1,0 +1,409 @@
+[
+  {
+    "id": "storage-bed-queen",
+    "name": "Canadian Made Queen Size Storage Bedroom Set",
+    "category": "beds",
+    "price": 1599,
+    "compareAtPrice": null,
+    "clearance": false,
+    "inStock": true,
+    "customSizes": true,
+    "description": "Canadian-made bedroom set with two large front drawers and rear open storage. Set includes queen bed, dresser plus mirror, chest and one nightstand. Available in 10 different colours and sizes.",
+    "image": "/images/products/storage-bed-queen.jpg",
+    "tags": [
+      "Canadian made",
+      "Bedroom set",
+      "Front drawers + rear storage",
+      "10 colours & sizes"
+    ]
+  },
+  {
+    "id": "bed-frame-queen",
+    "name": "Canadian Made Single Size Storage Bed",
+    "category": "beds",
+    "price": 349,
+    "compareAtPrice": null,
+    "clearance": true,
+    "inStock": true,
+    "customSizes": true,
+    "description": "Canadian-made storage bed with 3 drawers and a bookcase headboard. Available in 10 different colours and any size.",
+    "image": "/images/products/single-storage-bed.jpg",
+    "tags": [
+      "On sale",
+      "Canadian made",
+      "3 drawers + bookcase headboard",
+      "10 colours, any size"
+    ]
+  },
+  {
+    "id": "mattress-queen-medium",
+    "name": "Queen Medium-Density Mattress",
+    "category": "mattresses",
+    "price": 199,
+    "compareAtPrice": null,
+    "clearance": false,
+    "inStock": true,
+    "customSizes": false,
+    "description": "A medium-firm queen mattress. Supportive without being hard. In stock and ready today.",
+    "image": "https://d8j0ntlcm91z4.cloudfront.net/user_34LqZFYxxERGB6v84OdOWgYjVrf/hf_20260910_031317_7c4c1b50-6916-4188-851f-561764a8a73d.png",
+    "tags": [
+      "In stock",
+      "Medium firmness"
+    ]
+  },
+  {
+    "id": "mattress-single",
+    "name": "Single Mattress",
+    "category": "mattresses",
+    "price": 60,
+    "compareAtPrice": null,
+    "clearance": false,
+    "inStock": true,
+    "customSizes": false,
+    "description": "A comfortable single mattress at a factory price. Great for kids' rooms and guest beds.",
+    "image": "https://d8j0ntlcm91z4.cloudfront.net/user_34LqZFYxxERGB6v84OdOWgYjVrf/hf_20260910_031316_cba93a6a-8b80-4f9c-b0c0-29bcf6799a0a.png",
+    "tags": [
+      "In stock",
+      "Best value"
+    ]
+  },
+  {
+    "id": "single-bed-mattress-bundle",
+    "name": "Single Bed Frame + Mattress Bundle",
+    "category": "beds",
+    "price": 199,
+    "compareAtPrice": null,
+    "clearance": false,
+    "inStock": true,
+    "customSizes": true,
+    "description": "A single frame and mattress together, ready to sleep on. One easy price.",
+    "image": "/images/products/single-bed-mattress-bundle.jpg",
+    "tags": [
+      "Frame + mattress",
+      "In stock"
+    ]
+  },
+  {
+    "id": "comforter-set",
+    "name": "Comforter Set",
+    "category": "mattresses",
+    "price": 40,
+    "compareAtPrice": null,
+    "clearance": false,
+    "inStock": true,
+    "customSizes": false,
+    "description": "Comforter with two matching pillow shams. Soft, warm and easy to wash.",
+    "image": "https://d8j0ntlcm91z4.cloudfront.net/user_34LqZFYxxERGB6v84OdOWgYjVrf/hf_20260910_031316_4e1b39c9-a1ff-4eb2-8aaa-84c8d31c1b3f.png",
+    "tags": [
+      "Comforter + 2 shams",
+      "In stock"
+    ]
+  },
+  {
+    "id": "navy-sectional-sofa-bed",
+    "name": "Chase Sofa Bed",
+    "category": "sofas",
+    "price": 799,
+    "compareAtPrice": null,
+    "clearance": false,
+    "inStock": true,
+    "customSizes": true,
+    "description": "Sofa bed with built-in USB charging plus cup holders. Converts into a double-size bed. Available in light grey and dark grey.",
+    "image": "/images/navy-sectional-sofa-bed.jpg",
+    "tags": [
+      "USB charging",
+      "Cup holders",
+      "Converts to double bed",
+      "Light & dark grey"
+    ]
+  },
+  {
+    "id": "faux-marble-dining-set",
+    "name": "Faux Marble Dining Set with 4 Chairs",
+    "category": "dining",
+    "price": 399,
+    "compareAtPrice": null,
+    "clearance": true,
+    "inStock": true,
+    "customSizes": false,
+    "description": "Faux marble table with four chairs. Wipes clean and seats the whole family.",
+    "image": "/images/products/faux-marble-dining-set.jpg",
+    "tags": [
+      "Clearance",
+      "Seats 4"
+    ]
+  },
+  {
+    "id": "grey-sectional-sofa-bed",
+    "name": "Ethan Sectional Sofa Bed",
+    "category": "sofas",
+    "price": 899,
+    "compareAtPrice": null,
+    "clearance": false,
+    "inStock": true,
+    "customSizes": true,
+    "description": "Sectional sofa bed with built-in USB charging plus cup holders. Hidden storage in the chaise, pulls out into a bed. Available in light grey and dark grey.",
+    "image": "/images/grey-sectional-sofa-bed.jpg",
+    "tags": [
+      "USB charging",
+      "Cup holders",
+      "Hidden chaise storage",
+      "Pulls out into bed",
+      "Light & dark grey"
+    ]
+  },
+  {
+    "id": "grey-reclining-sofa-loveseat",
+    "name": "Grey Power Reclining Sofa & Loveseat",
+    "category": "sofas",
+    "price": null,
+    "compareAtPrice": null,
+    "clearance": false,
+    "inStock": true,
+    "customSizes": false,
+    "description": "Grey power reclining sofa and loveseat with cup holders, storage consoles and USB charging.",
+    "image": "/images/grey-reclining-sofa-loveseat.jpg",
+    "tags": [
+      "Power recline",
+      "Cup holders",
+      "USB charging"
+    ]
+  },
+  {
+    "id": "swivel-accent-chair",
+    "name": "Swivel Accent Chair",
+    "category": "accent-chairs",
+    "price": 299,
+    "compareAtPrice": 599,
+    "clearance": true,
+    "inStock": true,
+    "customSizes": false,
+    "description": "Canadian-made swivel chair in teal green with a loose cushion back and a solid wood frame.",
+    "image": "/images/products/swivel-accent-chair.jpg",
+    "tags": [
+      "Clearance",
+      "Canadian made",
+      "Swivel",
+      "Solid wood"
+    ]
+  },
+  {
+    "id": "bronx-accent-chair",
+    "name": "Bronx Accent Chair",
+    "category": "accent-chairs",
+    "price": 349,
+    "compareAtPrice": 599,
+    "clearance": true,
+    "inStock": true,
+    "customSizes": false,
+    "description": "Teal blue accent chair on a sleek chrome metal frame.",
+    "image": "/images/products/bronx-accent-chair.jpg",
+    "tags": [
+      "Clearance",
+      "Chrome frame"
+    ]
+  },
+  {
+    "id": "rome-accent-chair",
+    "name": "Rome Accent Chair",
+    "category": "accent-chairs",
+    "price": 349,
+    "compareAtPrice": 699,
+    "clearance": true,
+    "inStock": true,
+    "customSizes": false,
+    "description": "Canadian-made accent chair with a solid wood frame.",
+    "image": "/images/products/rome-accent-chair.jpg",
+    "tags": [
+      "Clearance",
+      "Canadian made",
+      "Solid wood"
+    ]
+  },
+  {
+    "id": "kylie-accent-chair",
+    "name": "Kylie Accent Chair",
+    "category": "accent-chairs",
+    "price": 349,
+    "compareAtPrice": 699,
+    "clearance": true,
+    "inStock": true,
+    "customSizes": false,
+    "description": "Canadian-made accent chair with a solid wood frame.",
+    "image": "/images/products/kylie-accent-chair.jpg",
+    "tags": [
+      "Clearance",
+      "Canadian made",
+      "Solid wood"
+    ]
+  },
+  {
+    "id": "bella-accent-chair",
+    "name": "Bella Accent Chair",
+    "category": "accent-chairs",
+    "price": 349,
+    "compareAtPrice": 699,
+    "clearance": true,
+    "inStock": true,
+    "customSizes": false,
+    "description": "Canadian-made accent chair with a solid wood frame.",
+    "image": "/images/products/bella-accent-chair.jpg",
+    "tags": [
+      "Clearance",
+      "Canadian made",
+      "Solid wood"
+    ]
+  },
+  {
+    "id": "ashley-sofa-set",
+    "name": "Ashley Sofa Set",
+    "category": "sofas",
+    "price": 1299,
+    "compareAtPrice": 2499,
+    "clearance": true,
+    "inStock": true,
+    "customSizes": false,
+    "description": "Canadian-made sofa set with a solid wood frame. Includes sofa, loveseat and chair.",
+    "image": "/images/products/ashley-sofa-set.jpg",
+    "tags": [
+      "Clearance",
+      "Canadian made",
+      "Sofa + loveseat + chair"
+    ]
+  },
+  {
+    "id": "kendall-sofa-loveseat",
+    "name": "Kendall Sofa + Loveseat",
+    "category": "sofas",
+    "price": 599,
+    "compareAtPrice": 1199,
+    "clearance": true,
+    "inStock": true,
+    "customSizes": false,
+    "description": "Canadian-made sofa and loveseat with a solid wood frame.",
+    "image": "/images/products/kendall-sofa-loveseat.jpg",
+    "tags": [
+      "Clearance",
+      "Sofa + loveseat",
+      "Canadian made"
+    ]
+  },
+  {
+    "id": "cloud-5pc-sectional-suite",
+    "name": "Cloud 5-Piece Sectional Suite",
+    "category": "sofas",
+    "price": 2499,
+    "compareAtPrice": 3999,
+    "clearance": true,
+    "inStock": true,
+    "customSizes": false,
+    "description": "Canadian-made 5-piece sectional suite with a solid wood frame and soft bouclé fabric.",
+    "image": "/images/products/cloud-5pc-sectional-suite.jpg",
+    "tags": [
+      "Clearance",
+      "5-piece",
+      "Bouclé fabric"
+    ]
+  },
+  {
+    "id": "venice-sofa",
+    "name": "Venice Sofa",
+    "category": "sofas",
+    "price": 999,
+    "compareAtPrice": 1499,
+    "clearance": true,
+    "inStock": true,
+    "customSizes": false,
+    "description": "Canadian-made sofa with a solid wood frame and gold metal legs.",
+    "image": "/images/products/venice-sofa.jpg",
+    "tags": [
+      "Clearance",
+      "Gold metal legs",
+      "Canadian made"
+    ]
+  },
+  {
+    "id": "ella-sofa-loveseat",
+    "name": "Ella Sofa + Loveseat",
+    "category": "sofas",
+    "price": 1299,
+    "compareAtPrice": 2199,
+    "clearance": true,
+    "inStock": true,
+    "customSizes": false,
+    "description": "Canadian-made sofa and loveseat with a solid wood frame.",
+    "image": "/images/products/ella-sofa-loveseat.jpg",
+    "tags": [
+      "Clearance",
+      "Sofa + loveseat",
+      "Canadian made"
+    ]
+  },
+  {
+    "id": "hazel-queen-bed",
+    "name": "Hazel Queen Bed",
+    "category": "beds",
+    "price": 279,
+    "compareAtPrice": 499,
+    "clearance": false,
+    "inStock": true,
+    "customSizes": false,
+    "description": "Queen bed frame at a factory price — simple, solid and ready for your room.",
+    "image": "/images/products/hazel-queen-bed.jpg",
+    "tags": [
+      "Queen",
+      "On sale"
+    ]
+  },
+  {
+    "id": "new-york-queen-bed",
+    "name": "New York Queen Bed",
+    "category": "beds",
+    "price": 299,
+    "compareAtPrice": 499,
+    "clearance": false,
+    "inStock": true,
+    "customSizes": false,
+    "description": "Modern grey linen platform bed with a tufted headboard. Solid and engineered wood frame with 13 slats and a metal centre support — no box spring required.",
+    "image": "/images/products/new-york-queen-bed.jpg",
+    "tags": [
+      "Queen",
+      "Grey linen",
+      "Tufted headboard",
+      "No box spring needed"
+    ]
+  },
+  {
+    "id": "riverside-queen-bed",
+    "name": "Riverside Queen Bed",
+    "category": "beds",
+    "price": 399,
+    "compareAtPrice": 699,
+    "clearance": false,
+    "inStock": true,
+    "customSizes": false,
+    "description": "Queen bed frame with clean, modern lines — built to last.",
+    "image": "/images/products/riverside-queen-bed.jpg",
+    "tags": [
+      "Queen",
+      "On sale"
+    ]
+  },
+  {
+    "id": "aura-queen-bed-set",
+    "name": "Aura Queen Bed Set",
+    "category": "beds",
+    "price": 1099,
+    "compareAtPrice": 1799,
+    "clearance": true,
+    "inStock": true,
+    "customSizes": false,
+    "description": "Queen bedroom set: includes the queen bed, a dresser with mirror and one nightstand.",
+    "image": "/images/products/aura-queen-bed-set.jpg",
+    "tags": [
+      "Clearance",
+      "Bedroom set",
+      "Dresser + mirror + nightstand"
+    ]
+  }
+]

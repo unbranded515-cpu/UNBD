@@ -1,29 +1,20 @@
 {
-  "name": "unbranded",
-  "version": "0.1.0",
+  "name": "diamond-sofas-website",
+  "type": "module",
+  "version": "1.0.0",
   "private": true,
-  "description": "Unbranded — AI review reply + local SEO app for small businesses",
+  "description": "Marketing website for Diamond Sofas MFG — furniture manufacturer and showroom in Kingston, Ontario.",
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
   },
   "dependencies": {
-    "@anthropic-ai/sdk": "^0.122.0",
-    "next": "^14.2.15",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1"
-  },
-  "devDependencies": {
-    "@types/node": "^20.19.43",
-    "@types/react": "^18.3.31",
-    "@types/react-dom": "^18.3.7",
-    "autoprefixer": "^10.5.4",
-    "eslint": "^8.57.1",
-    "eslint-config-next": "^14.2.15",
-    "postcss": "^8.5.26",
-    "tailwindcss": "^3.4.14",
-    "typescript": "^5.9.3"
+    "@astrojs/sitemap": "3.2.1",
+    "@astrojs/tailwind": "^5.1.2",
+    "astro": "^4.16.0",
+    "tailwindcss": "^3.4.14"
   }
 }

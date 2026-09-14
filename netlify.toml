@@ -1,0 +1,7 @@
+# Netlify build + deploy config for the Diamond Sofas MFG website.
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+# Astro outputs a static site; no extra redirects needed.
+# Netlify Forms are detected automatically from the static HTML at build time.
