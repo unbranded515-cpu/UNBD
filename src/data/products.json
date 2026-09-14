@@ -19,18 +19,20 @@
   },
   {
     "id": "bed-frame-queen",
-    "name": "Queen Bed Frame",
+    "name": "Canadian Made Single Size Storage Bed",
     "category": "beds",
-    "price": 299,
+    "price": 349,
     "compareAtPrice": null,
-    "clearance": false,
+    "clearance": true,
     "inStock": true,
     "customSizes": true,
-    "description": "Sturdy queen frame that holds a mattress on its own. No box spring required.",
-    "image": "https://d8j0ntlcm91z4.cloudfront.net/user_34LqZFYxxERGB6v84OdOWgYjVrf/hf_20260910_031316_565830b7-8cab-409d-ae09-fe4f4a2515ce.png",
+    "description": "Canadian-made storage bed with 3 drawers and a bookcase headboard. Available in 10 different colours and any size.",
+    "image": "/images/products/single-storage-bed.jpg",
     "tags": [
-      "No box spring needed",
-      "Custom sizes"
+      "On sale",
+      "Canadian made",
+      "3 drawers + bookcase headboard",
+      "10 colours, any size"
     ]
   },
   {
