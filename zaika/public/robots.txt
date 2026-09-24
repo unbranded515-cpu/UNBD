@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# TODO(pre-launch): update to the live domain once confirmed.
+Sitemap: https://zaikaonthebay.ca/sitemap.xml

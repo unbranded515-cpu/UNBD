@@ -1,0 +1,65 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-cream text-ink font-sans antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-serif;
+  }
+
+  /* Respect users who prefer reduced motion — disable smooth scroll. */
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+}
+
+@layer components {
+  /* Shared page container */
+  .container-x {
+    @apply mx-auto w-full max-w-content px-5 sm:px-8;
+  }
+
+  /* Small uppercase eyebrow label above headings */
+  .eyebrow {
+    @apply mb-3 inline-block text-xs font-semibold uppercase tracking-[0.2em] text-leaf;
+  }
+
+  /* Primary CTA — dark green background, cream text */
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-forest px-6 py-3
+      text-sm font-semibold text-cream transition-colors duration-200
+      hover:bg-forest-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-forest
+      focus-visible:ring-offset-2 focus-visible:ring-offset-cream;
+  }
+
+  /* Hide scrollbar on horizontally-scrollable strips (e.g. menu tab bar) */
+  .scrollbar-none {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Secondary CTA — outlined green */
+  .btn-outline {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-forest
+      bg-transparent px-6 py-3 text-sm font-semibold text-forest transition-colors duration-200
+      hover:bg-forest hover:text-cream focus:outline-none focus-visible:ring-2
+      focus-visible:ring-forest focus-visible:ring-offset-2 focus-visible:ring-offset-cream;
+  }
+}
