@@ -100,6 +100,23 @@
     ]
   },
   {
+    "id": "red-check-comforter-set",
+    "name": "Red Buffalo Check Comforter Set",
+    "category": "mattresses",
+    "price": 39,
+    "compareAtPrice": null,
+    "clearance": false,
+    "inStock": true,
+    "customSizes": false,
+    "description": "Red and black buffalo-check comforter that comes with two matching pillow shams.",
+    "image": "/images/products/red-check-comforter-set.jpg",
+    "tags": [
+      "Comforter + 2 shams",
+      "Red buffalo check",
+      "In stock"
+    ]
+  },
+  {
     "id": "navy-sectional-sofa-bed",
     "name": "Chase Sofa Bed",
     "category": "sofas",
