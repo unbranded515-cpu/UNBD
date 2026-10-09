@@ -1,0 +1,79 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Placeholder from '../components/Placeholder.astro';
+import { site, images } from '../data/site';
+---
+<BaseLayout
+  title="Visit Our Furniture Showroom in Kingston, Ontario — Diamond Sofas MFG"
+  description="Visit the Diamond Sofas MFG showroom at Unit 15, 1325 Centennial Drive, Kingston — off Exit 611 from the 401. Open 7 days. Call 647-210-9552."
+>
+  <section class="border-b border-charcoal/10 bg-paper">
+    <div class="container-x py-12 sm:py-16">
+      <p class="eyebrow">Visit the showroom</p>
+      <h1 class="mt-2 max-w-3xl text-3xl font-extrabold tracking-tight text-charcoal sm:text-4xl lg:text-5xl">
+        Come sit on it before you buy
+      </h1>
+      <p class="mt-4 max-w-2xl text-lg leading-relaxed text-muted">
+        We're 2 minutes off the 401. Try the sofas, lie on the mattresses, and talk to the
+        family that makes them.
+      </p>
+    </div>
+  </section>
+
+  <section class="container-x pt-10">
+    <div class="overflow-hidden rounded-xl2 shadow-card">
+      <Placeholder label="Wide shot of the Kingston showroom floor" src={images.showroom} ratio="16/9" rounded={false} />
+    </div>
+  </section>
+
+  <section class="section container-x">
+    <div class="grid gap-8 lg:grid-cols-2">
+      <div class="overflow-hidden rounded-xl2 shadow-card">
+        <iframe
+          title="Map to Diamond Sofas MFG in Kingston"
+          src={site.mapEmbedUrl}
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          class="h-full min-h-[360px] w-full border-0"
+        ></iframe>
+      </div>
+
+      <div class="flex flex-col justify-center gap-6">
+        <div>
+          <h2 class="text-sm font-semibold uppercase tracking-wide text-gold-dark">Address</h2>
+          <p class="mt-1 text-lg font-semibold text-charcoal">{site.address.line}</p>
+          <p class="text-muted">{site.address.city}, {site.address.province}</p>
+        </div>
+        <div>
+          <h2 class="text-sm font-semibold uppercase tracking-wide text-gold-dark">Getting here</h2>
+          <p class="mt-1 text-muted">
+            Take <strong class="text-charcoal">Exit 611</strong> from the 401 — we're about 2 minutes away in Unit 15.
+          </p>
+        </div>
+        <div class="grid gap-6 sm:grid-cols-2">
+          <div>
+            <h2 class="text-sm font-semibold uppercase tracking-wide text-gold-dark">Hours</h2>
+            <p class="mt-1 text-muted">{site.hours}</p>
+            <p class="text-xs text-muted">(Exact hours confirmed by phone.)</p>
+          </div>
+          <div>
+            <h2 class="text-sm font-semibold uppercase tracking-wide text-gold-dark">Phone</h2>
+            <p class="mt-1"><a href={site.phoneHref} class="text-lg font-semibold text-gold-dark hover:text-gold">{site.phone}</a></p>
+          </div>
+        </div>
+        <div>
+          <h2 class="text-sm font-semibold uppercase tracking-wide text-gold-dark">Parking</h2>
+          <p class="mt-1 text-muted">Free parking right out front of the unit.</p>
+        </div>
+        <div class="rounded-xl2 bg-paper p-5 shadow-card">
+          <h2 class="font-semibold text-charcoal">What to bring</h2>
+          <p class="mt-1 text-sm text-muted">Your room measurements and a photo of the space. It helps us match the right size and colour on the spot.</p>
+        </div>
+        <div class="flex flex-wrap gap-3">
+          <a href={site.mapsUrl} target="_blank" rel="noopener" class="btn-primary">Get directions</a>
+          <a href={site.phoneHref} class="btn-secondary">Call {site.phone}</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

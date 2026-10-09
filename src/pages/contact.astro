@@ -1,0 +1,78 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../data/site';
+---
+<BaseLayout
+  title="Contact Diamond Sofas MFG — Furniture Store in Kingston, Ontario"
+  description="Contact Diamond Sofas MFG in Kingston, Ontario. Call 647-210-9552, email diamondsofasmfg@gmail.com, or message us on Instagram. Open 7 days."
+>
+  <section class="border-b border-charcoal/10 bg-paper">
+    <div class="container-x py-12 sm:py-16">
+      <p class="eyebrow">Contact</p>
+      <h1 class="mt-2 text-3xl font-extrabold tracking-tight text-charcoal sm:text-4xl lg:text-5xl">
+        Get in touch
+      </h1>
+      <p class="mt-4 max-w-2xl text-lg leading-relaxed text-muted">
+        Call, email, or send us a message — we'll get right back to you.
+      </p>
+    </div>
+  </section>
+
+  <section class="section container-x">
+    <div class="grid gap-10 lg:grid-cols-2">
+      <div class="grid gap-4">
+        <a href={site.phoneHref} class="flex items-center gap-4 rounded-xl2 bg-paper p-5 shadow-card transition-shadow hover:shadow-cardHover">
+          <span class="grid h-11 w-11 place-items-center rounded-xl bg-cream text-gold-dark">
+            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.24 11.4 11.4 0 0 0 3.6.58 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.4 11.4 0 0 0 .58 3.6 1 1 0 0 1-.24 1z" /></svg>
+          </span>
+          <span><span class="block text-sm text-muted">Call</span><span class="text-lg font-semibold text-charcoal">{site.phone}</span></span>
+        </a>
+        <a href={`mailto:${site.email}`} class="flex items-center gap-4 rounded-xl2 bg-paper p-5 shadow-card transition-shadow hover:shadow-cardHover">
+          <span class="grid h-11 w-11 place-items-center rounded-xl bg-cream text-gold-dark">
+            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2" /><path d="m4 7 8 6 8-6" /></svg>
+          </span>
+          <span><span class="block text-sm text-muted">Email</span><span class="text-lg font-semibold text-charcoal">{site.email}</span></span>
+        </a>
+        <a href={site.instagramUrl} target="_blank" rel="noopener" class="flex items-center gap-4 rounded-xl2 bg-paper p-5 shadow-card transition-shadow hover:shadow-cardHover">
+          <span class="grid h-11 w-11 place-items-center rounded-xl bg-cream text-gold-dark">
+            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="3.5" /><circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none" /></svg>
+          </span>
+          <span><span class="block text-sm text-muted">Instagram</span><span class="text-lg font-semibold text-charcoal">{site.instagram}</span></span>
+        </a>
+        <div class="rounded-xl2 bg-paper p-5 shadow-card">
+          <h2 class="font-semibold text-charcoal">Showroom</h2>
+          <p class="mt-1 text-sm text-muted">{site.address.full}<br />{site.address.directions} · {site.hours}</p>
+          <a href={site.mapsUrl} target="_blank" rel="noopener" class="mt-3 inline-block text-sm font-semibold text-gold-dark hover:text-gold">Get directions →</a>
+        </div>
+      </div>
+
+      <!-- Netlify Forms: submissions email to the address set in the Netlify dashboard. -->
+      <form
+        name="contact"
+        method="POST"
+        data-netlify="true"
+        netlify-honeypot="bot-field"
+        action="/thank-you"
+        class="rounded-xl2 bg-cream p-6 shadow-card sm:p-8"
+      >
+        <input type="hidden" name="form-name" value="contact" />
+        <p class="hidden"><label>Don't fill this out if you're human: <input name="bot-field" /></label></p>
+        <div class="grid gap-5">
+          <label class="flex flex-col gap-1.5 text-sm font-medium text-charcoal">
+            Name
+            <input type="text" name="name" required autocomplete="name" class="rounded-lg border border-charcoal/15 bg-paper px-3 py-2.5 text-sm" />
+          </label>
+          <label class="flex flex-col gap-1.5 text-sm font-medium text-charcoal">
+            Phone
+            <input type="tel" name="phone" required autocomplete="tel" class="rounded-lg border border-charcoal/15 bg-paper px-3 py-2.5 text-sm" />
+          </label>
+          <label class="flex flex-col gap-1.5 text-sm font-medium text-charcoal">
+            Message
+            <textarea name="message" rows="5" required class="rounded-lg border border-charcoal/15 bg-paper px-3 py-2.5 text-sm"></textarea>
+          </label>
+          <button type="submit" class="btn-primary w-full">Send message</button>
+        </div>
+      </form>
+    </div>
+  </section>
+</BaseLayout>
