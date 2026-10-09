@@ -187,6 +187,24 @@
     ]
   },
   {
+    "id": "grey-sectional-floating-ottoman",
+    "name": "Grey Sectional Sofa with Floating Ottoman",
+    "category": "sofas",
+    "price": 399,
+    "compareAtPrice": 699,
+    "clearance": true,
+    "inStock": true,
+    "customSizes": false,
+    "description": "Grey fabric sectional sofa with a floating ottoman, two built-in cup holders, a USB charging port and a reversible chaise.",
+    "image": "/images/products/grey-sectional-floating-ottoman.jpg",
+    "tags": [
+      "Clearance",
+      "Reversible chaise",
+      "USB charging",
+      "2 cup holders"
+    ]
+  },
+  {
     "id": "swivel-accent-chair",
     "name": "Swivel Accent Chair",
     "category": "accent-chairs",
