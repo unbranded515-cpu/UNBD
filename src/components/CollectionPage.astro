@@ -1,0 +1,114 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ProductCard from './ProductCard.astro';
+import { site } from '../data/site';
+import allProducts from '../data/products.json';
+
+interface Props {
+  title: string; // SEO <title>
+  description: string; // SEO meta description
+  heading: string; // H1
+  intro: string; // 1-2 sentence intro
+  category?: string; // filter products.json by category
+  clearanceOnly?: boolean; // filter products.json by clearance flag
+}
+const { title, description, heading, intro, category, clearanceOnly } = Astro.props;
+
+let products = allProducts;
+if (clearanceOnly) products = products.filter((p) => p.clearance);
+if (category) products = products.filter((p) => p.category === category);
+---
+<BaseLayout title={title} description={description}>
+  <section class="border-b border-charcoal/10 bg-paper">
+    <div class="container-x py-12 sm:py-16">
+      <p class="eyebrow">Kingston, Ontario</p>
+      <h1 class="mt-2 max-w-3xl text-3xl font-extrabold tracking-tight text-charcoal sm:text-4xl lg:text-5xl">
+        {heading}
+      </h1>
+      <p class="mt-4 max-w-2xl text-lg leading-relaxed text-muted">{intro}</p>
+      <div class="mt-6 flex flex-wrap gap-3">
+        <a href={site.phoneHref} class="btn-primary">
+          <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.24 11.4 11.4 0 0 0 3.6.58 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.4 11.4 0 0 0 .58 3.6 1 1 0 0 1-.24 1z" /></svg>
+          Call {site.phone}
+        </a>
+        <a href="/custom" class="btn-secondary">Ask about a custom build</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Simple, JS-free filters: price range + in-stock. -->
+  <section class="container-x pt-10">
+    <form
+      class="flex flex-wrap items-end gap-4 rounded-xl2 bg-paper p-4 shadow-card"
+      data-filter-form
+      aria-label="Filter products"
+    >
+      <label class="flex flex-col gap-1 text-sm font-medium text-charcoal">
+        Max price
+        <select data-filter-price class="rounded-lg border border-charcoal/15 bg-cream px-3 py-2 text-sm">
+          <option value="">Any price</option>
+          <option value="100">Under $100</option>
+          <option value="300">Under $300</option>
+          <option value="500">Under $500</option>
+          <option value="1000">Under $1,000</option>
+        </select>
+      </label>
+      <label class="flex items-center gap-2 text-sm font-medium text-charcoal">
+        <input type="checkbox" data-filter-stock class="h-4 w-4 rounded border-charcoal/30 text-gold focus:ring-gold" />
+        In stock only
+      </label>
+      <p class="ml-auto text-sm text-muted" data-filter-count></p>
+    </form>
+  </section>
+
+  <section class="section container-x pt-8">
+    {
+      products.length === 0 ? (
+        <p class="rounded-xl2 bg-paper p-8 text-center text-muted shadow-card">
+          Nothing listed here yet — call {site.phone} and we'll tell you what's on the floor.
+        </p>
+      ) : (
+        <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4" data-product-grid>
+          {products.map((product) => (
+            <div data-product data-price={product.price ?? ''} data-instock={String(!!product.inStock)}>
+              <ProductCard product={product} />
+            </div>
+          ))}
+        </div>
+      )
+    }
+  </section>
+</BaseLayout>
+
+<script>
+  // Lightweight client filter — no library, negligible JS.
+  const form = document.querySelector('[data-filter-form]');
+  if (form) {
+    const priceSel = form.querySelector('[data-filter-price]');
+    const stockChk = form.querySelector('[data-filter-stock]');
+    const countEl = form.querySelector('[data-filter-count]');
+    const items = Array.from(document.querySelectorAll('[data-product]'));
+
+    const apply = () => {
+      const maxPrice = priceSel && priceSel.value ? Number(priceSel.value) : null;
+      const stockOnly = stockChk ? stockChk.checked : false;
+      let shown = 0;
+      items.forEach((el) => {
+        const priceRaw = el.getAttribute('data-price');
+        const price = priceRaw === '' ? null : Number(priceRaw);
+        const inStock = el.getAttribute('data-instock') === 'true';
+        // "Call for price" items (no price) always pass the price filter.
+        const okPrice = maxPrice === null || price === null || price <= maxPrice;
+        const okStock = !stockOnly || inStock;
+        const visible = okPrice && okStock;
+        el.hidden = !visible;
+        if (visible) shown++;
+      });
+      if (countEl) countEl.textContent = `${shown} item${shown === 1 ? '' : 's'}`;
+    };
+
+    priceSel && priceSel.addEventListener('change', apply);
+    stockChk && stockChk.addEventListener('change', apply);
+    apply();
+  }
+</script>

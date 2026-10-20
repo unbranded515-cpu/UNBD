@@ -1,152 +1,175 @@
-# Unbranded
+# Diamond Sofas MFG — Website
 
-**AI review replies + local SEO for small businesses.**
+A fast, static marketing site for **Diamond Sofas MFG**, a family-owned furniture
+manufacturer and showroom in Kingston, Ontario. Its job is to drive showroom
+visits, phone calls, and custom-furniture quote requests. **There is no online
+checkout** — every product shows a price and a "Call / Message for this item"
+action.
 
-Unbranded turns a small business's reputation into rankings. It drafts warm,
-human, on-brand replies to every Google review, audits a website's local-SEO
-signals, and (soon) writes ranking-focused blogs — all from one dashboard.
-
-This repo is the **MVP**, built flagship-first around the **AI review reply
-engine**. It runs today in **draft mode** with zero external accounts, and
-upgrades to live AI the moment you add a Claude API key.
-
----
-
-## What's built
-
-| Feature | Status | Notes |
-|---|---|---|
-| **Review reply engine** | ✅ Working | Sentiment-aware (positive/neutral/negative), brand-voice, keyword-smart replies. `src/app/api/reply` |
-| **Review inbox UI** | ✅ Working | Draft, edit, regenerate, copy. Add your own reviews. `src/app/reviews` |
-| **Brand voice profile** | ✅ Working | Tone, keywords, sign-off, notes — drives every reply. `src/app/settings` |
-| **Website / SEO audit** | ✅ Working | Real on-page crawl + scored report + AI action plan. `src/app/seo` |
-| **AI blog writer** | ✅ Working | SEO posts in your brand voice; copy HTML or download. `src/app/blog` |
-| **Google connect (OAuth)** | ✅ Wired | Full OAuth + sync + post-reply flow; goes live once you add creds + API access |
-| Auto-blog publishing to site | 🔜 Phase 2 | One-click publish to WordPress/Shopify (export works today) |
-| Accounts + Stripe billing | 🔜 Phase 2 | Multi-user, plans |
-
-**Draft mode vs. live:** every feature works without any key using sensible
-fallbacks, so you can demo the product immediately. Add `ANTHROPIC_API_KEY`
-and the real model takes over automatically — no code change.
+Built with **[Astro](https://astro.build)** + **[Tailwind CSS](https://tailwindcss.com)**.
+Static output, mobile-first, no heavy JavaScript.
 
 ---
 
-## Getting started
+## Quick start
 
 ```bash
-npm install
-cp .env.example .env.local     # then add your ANTHROPIC_API_KEY (optional to start)
-npm run dev                    # http://localhost:3000
+npm install      # install dependencies
+npm run dev      # local dev server at http://localhost:4321
+npm run build    # production build into /dist
+npm run preview  # preview the production build locally
 ```
 
-Open **/reviews** and click **Draft reply** on any review. Set your voice in
-**/settings** first for the best results.
-
-### Environment
-
-See `.env.example`. The only one that matters to start:
-
-- `ANTHROPIC_API_KEY` — from [console.anthropic.com](https://console.anthropic.com). Without it, the app uses template fallbacks.
-- `ANTHROPIC_MODEL` — defaults to `claude-opus-5`. For high-volume review
-  replies, `claude-sonnet-5` or `claude-haiku-4-5` cut cost sharply while
-  staying strong on short text. Change it in one place.
+You need **Node 18+**.
 
 ---
 
-## Tech stack
-
-- **Next.js 14** (App Router) + **React 18** + **TypeScript**
-- **Tailwind CSS** for styling (brand palette in `tailwind.config.ts`)
-- **@anthropic-ai/sdk** — Claude for reply + audit generation
-- Server-side API routes (`src/app/api/*`) keep the API key off the client
+## Project structure
 
 ```
+public/
+  images/            ← drop real photos here (see public/images/README.md)
+  favicon.svg
+  robots.txt
 src/
-  app/
-    page.tsx           Dashboard
-    reviews/           ⭐ Review inbox (flagship)
-    seo/               SEO audit
-    settings/          Brand voice
-    api/reply/         POST → generate a review reply
-    api/audit/         POST → crawl + score a website
-  lib/
-    anthropic.ts       Claude client, model config, key detection
-    types.ts           Review + BrandVoice types, sentiment logic
-    useBrand.ts        Brand voice persistence (localStorage for now)
-    sampleReviews.ts   Seed data
-  components/Nav.tsx    Sidebar
+  data/
+    products.json    ← all products live here (edit this to add/change items)
+    site.ts          ← business facts: phone, address, hours, links
+  components/         ← Header, Footer, ProductCard, CollectionPage, etc.
+  layouts/
+    BaseLayout.astro ← <head>, SEO tags, LocalBusiness JSON-LD, header/footer
+  pages/             ← one file per URL (index, sofas, beds, custom, …)
+  styles/
+    global.css       ← Tailwind + a few shared component classes
+astro.config.mjs     ← set the live domain here (the `site` field)
+tailwind.config.mjs  ← colours, fonts
+netlify.toml         ← Netlify build settings
 ```
 
 ---
 
-## Phase 2 — connecting Google (the roadmap)
+## How to add or edit a product
 
-The flagship becomes fully automatic once connected to the **Google Business
-Profile API**. Honest sequencing, because this is the gating dependency:
+All products live in **`src/data/products.json`**. Add an object to the array:
 
-1. **Apply for API access early.** Google reviews/replies run through the
-   [Business Profile APIs](https://developers.google.com/my-business), which
-   require an application + allow-listing that can take weeks. Do this first.
-2. **OAuth connect.** Each business owner signs in with Google and grants
-   access to the profile they manage (`GOOGLE_CLIENT_ID/SECRET` in `.env`).
-3. **Sync reviews** into the inbox instead of the sample data.
-4. **Post approved replies** back with one click (or auto-post above a
-   confidence threshold).
+```json
+{
+  "id": "unique-slug",
+  "name": "Product Name",
+  "category": "sofas",           // sofas | beds | mattresses | dining
+  "price": 499,                   // a number, or null for "Call for price"
+  "compareAtPrice": 699,          // optional original price (shows a strike-through), or null
+  "clearance": true,              // true = also shows on the Clearance page + home highlights
+  "inStock": true,                // used by the "In stock only" filter
+  "customSizes": true,            // whether custom sizes are offered
+  "description": "One warm, plain sentence.",
+  "image": "/images/unique-slug.jpg",
+  "tags": ["Clearance", "Solid wood"]   // small pills shown on the card
+}
+```
 
-Until approval lands, **draft mode** is the product: generate → copy → paste
-into Google. That's fully functional today.
+Notes:
+- **Category** must be one of `sofas`, `beds`, `mattresses`, `dining` for the item
+  to appear on the matching page. (Coffee tables and accent chairs currently live
+  under `dining` / `sofas` respectively — adjust as you like.)
+- **Price `null`** shows **"Call for price"** instead of a number.
+- **`clearance: true`** automatically lists the item on `/clearance` and in the
+  home-page "Clearance highlights" grid.
+- No individual product pages exist in v1 — the grid is one level deep by design.
 
-### Turning Google on (once you have access)
-
-The OAuth flow is already built (`/api/google/*` + the Connect banner on the
-Reviews page). To activate:
-
-1. In [Google Cloud Console](https://console.cloud.google.com): create an OAuth
-   2.0 Client ID (Web application), and add the redirect URI
-   `http://localhost:3000/api/google/callback` (and your production URL).
-2. Enable the Business Profile APIs and request access for review management.
-3. Put the values in `.env.local`:
-   ```
-   GOOGLE_CLIENT_ID=...
-   GOOGLE_CLIENT_SECRET=...
-   GOOGLE_REDIRECT_URI=http://localhost:3000/api/google/callback
-   ```
-4. Restart, open **/reviews**, click **Connect Google**, then **Sync live
-   reviews**. Approved replies post back with **Post to Google**.
-
-Tokens are stored in httpOnly cookies (fine for single-business testing).
-Move them to a database when you add multi-user accounts.
-
-> ⚠️ **Never generate fake reviews.** Unbranded only replies to real reviews
-> and helps happy customers leave genuine ones. Fake reviews violate Google
-> policy and get businesses banned.
+Save the file and the site updates. No code changes needed.
 
 ---
 
-## Deploy (get a live URL)
+## How to swap images
 
-The app is a standard Next.js project — **Vercel** deploys it with zero config.
+1. Put your photo in **`public/images/`**.
+2. Name it to match — for products, match the `image` field in
+   `products.json` (e.g. `storage-bed-queen.jpg`); for page imagery, use the
+   filenames listed in **`public/images/README.md`**.
 
-1. Push this branch to GitHub (already done).
-2. Go to [vercel.com/new](https://vercel.com/new), import the **UNBD** repo,
-   and pick this branch.
-3. Add environment variables in the Vercel project settings:
-   - `ANTHROPIC_API_KEY` (for live AI; omit to run in draft mode)
-   - `ANTHROPIC_MODEL` (optional, e.g. `claude-haiku-4-5` for cheaper replies)
-   - the `GOOGLE_*` vars later, when you activate Google
-4. Deploy. You'll get a URL like `unbranded.vercel.app` to open on your phone
-   and share with your test clients.
-5. **After deploy, set your production redirect URI** in Google Cloud to
-   `https://YOUR-URL/api/google/callback` and add it to `GOOGLE_REDIRECT_URI`.
+Until a real photo exists, the site shows a labelled grey placeholder box telling
+you exactly what photo goes there. As soon as the file is present, it replaces the
+placeholder — no code changes.
 
-> Any Node host works too (`npm run build && npm run start`). It needs a Node
-> runtime — the API routes are server-side, so it can't be a purely static host.
+Recommended: JPG or WebP, ~1200px wide, under ~300 KB each for fast mobile loads.
 
-## Scripts
+---
 
-```bash
-npm run dev     # dev server
-npm run build   # production build
-npm run start   # serve the production build
-npm run lint    # eslint
-```
+## Forms (quote + contact)
+
+Forms use **[Netlify Forms](https://docs.netlify.com/forms/setup/)**. When the site
+is deployed on Netlify, submissions are captured automatically — no server code.
+
+**To receive submissions by email at `diamondsofasmfg@gmail.com`:**
+1. Deploy to Netlify (below).
+2. In the Netlify dashboard: **Forms → Form notifications → Add notification →
+   Email notification**, and enter `diamondsofasmfg@gmail.com`.
+
+Two forms are wired up: `custom-quote` (the `/custom` page) and `contact` (the
+`/contact` page). Both redirect to `/thank-you` on success.
+
+### Using Formspree instead (e.g. if you deploy to Vercel)
+
+Netlify Forms only works on Netlify. If you host elsewhere:
+1. Create a free form at [formspree.io](https://formspree.io) and copy its endpoint
+   (looks like `https://formspree.io/f/abcdwxyz`).
+2. In `src/pages/custom.astro` and `src/pages/contact.astro`, change each
+   `<form>` tag:
+   - set `action="https://formspree.io/f/XX: your-id"`
+   - remove `data-netlify="true"` and `netlify-honeypot="bot-field"`
+   - remove the hidden `form-name` input
+3. Point Formspree to email `diamondsofasmfg@gmail.com` in its dashboard.
+
+---
+
+## Deploy
+
+### Netlify (recommended — enables the forms)
+1. Push this repo to GitHub.
+2. In Netlify: **Add new site → Import an existing project** and pick the repo.
+3. Build settings are read from `netlify.toml` (`npm run build`, publish `dist`).
+   Deploy.
+4. Set up the form email notification (see **Forms** above).
+
+### Vercel
+1. Push to GitHub and import the repo in Vercel.
+2. Vercel auto-detects Astro (build `npm run build`, output `dist`). Deploy.
+3. Switch the forms to Formspree (see above) — Netlify Forms won't run on Vercel.
+
+---
+
+## Point the domain (diamondsofasmfg.com)
+
+1. Deploy the site first (above) so you have a live URL.
+2. In your host (Netlify or Vercel): **Domain settings → Add a custom domain →**
+   enter `diamondsofasmfg.com`.
+3. At your domain registrar, update DNS as the host instructs — typically:
+   - an **A record** for `diamondsofasmfg.com` → the host's IP (Netlify: `75.2.60.5`),
+     **or** a Netlify/Vercel nameserver change, and
+   - a **CNAME** for `www` → your host's target.
+4. Wait for DNS to propagate (minutes to a few hours). HTTPS is issued automatically.
+5. In **`astro.config.mjs`**, confirm `site: 'https://diamondsofasmfg.com'` so the
+   sitemap and canonical URLs use the real domain, then redeploy.
+
+---
+
+## SEO built in
+
+- Unique `<title>` + meta description per page, each mentioning **Kingston**.
+- One `<h1>` per page, semantic headings.
+- **LocalBusiness (FurnitureStore) JSON-LD** on every page — name, address, phone,
+  hours, geo. Update the coordinates in `src/data/site.ts` (`geo`) with the exact
+  showroom location when confirmed.
+- Product image alt text comes from product names.
+- `robots.txt` (in `public/`) and an auto-generated `sitemap-index.xml`
+  (via `@astrojs/sitemap`).
+
+---
+
+## Things to confirm before launch
+
+- Exact showroom **opening hours** (currently shown as "Open 7 days a week").
+- Exact **geo coordinates** in `src/data/site.ts` for the map/JSON-LD.
+- Replace all placeholder images.
+- Set the Netlify form email notification to `diamondsofasmfg@gmail.com`.

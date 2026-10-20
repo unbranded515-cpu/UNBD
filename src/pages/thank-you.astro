@@ -1,0 +1,22 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../data/site';
+---
+<BaseLayout
+  title="Thank You — Diamond Sofas MFG, Kingston"
+  description="Thanks for reaching out to Diamond Sofas MFG in Kingston, Ontario. We'll be in touch within one business day."
+>
+  <section class="container-x flex min-h-[55vh] flex-col items-center justify-center py-20 text-center">
+    <span class="grid h-16 w-16 place-items-center rounded-full bg-gold/15 text-gold-dark">
+      <svg class="h-8 w-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="m5 13 4 4L19 7" /></svg>
+    </span>
+    <h1 class="mt-6 text-3xl font-extrabold tracking-tight text-charcoal sm:text-4xl">Thanks — we've got it</h1>
+    <p class="mt-4 max-w-md text-lg text-muted">
+      Jai will call you within one business day. In a hurry? Call us now and we'll help you right away.
+    </p>
+    <div class="mt-8 flex flex-wrap justify-center gap-3">
+      <a href={site.phoneHref} class="btn-primary">Call {site.phone}</a>
+      <a href="/" class="btn-secondary">Back to home</a>
+    </div>
+  </section>
+</BaseLayout>

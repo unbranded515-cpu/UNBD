@@ -1,0 +1,61 @@
+---
+// A clearly-labelled placeholder box. Shows the real image if the file exists
+// once photos are dropped into /public/images; until then it shows the label
+// so the owner knows exactly what photo goes where.
+interface Props {
+  label: string;
+  src?: string;
+  alt?: string;
+  ratio?: string; // e.g. "4/3", "16/9", "1/1"
+  class?: string;
+  rounded?: boolean;
+}
+const {
+  label,
+  src,
+  alt = '',
+  ratio = '4/3',
+  class: className = '',
+  rounded = true,
+} = Astro.props;
+---
+<div
+  class:list={[
+    'placeholder-box relative flex items-center justify-center overflow-hidden bg-[#efe9df] text-muted',
+    rounded ? 'rounded-xl2' : '',
+    className,
+  ]}
+  style={`aspect-ratio:${ratio};`}
+>
+  {
+    src ? (
+      <img
+        src={src}
+        alt={alt || label}
+        loading="lazy"
+        decoding="async"
+        class="h-full w-full object-cover"
+        onerror="this.style.display='none';this.parentElement.classList.add('placeholder-missing');"
+      />
+    ) : null
+  }
+  <div class="placeholder-label pointer-events-none absolute inset-0 flex flex-col items-center justify-center gap-2 p-4 text-center">
+    <svg class="h-8 w-8 opacity-40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+      <rect x="3" y="4" width="18" height="16" rx="2" />
+      <circle cx="8.5" cy="9.5" r="1.5" />
+      <path d="m4 18 5-5 3 3 4-4 4 4" />
+    </svg>
+    <span class="text-xs font-medium uppercase tracking-wide opacity-60">Photo</span>
+    <span class="max-w-[22ch] text-sm leading-snug opacity-80">{label}</span>
+  </div>
+</div>
+
+<style>
+  /* Hide the label overlay once a real image loads on top of it. */
+  .placeholder-box:has(img:not([style*='display: none'])) .placeholder-label {
+    opacity: 0;
+  }
+  .placeholder-box.placeholder-missing .placeholder-label {
+    opacity: 1;
+  }
+</style>
