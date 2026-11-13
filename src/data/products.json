@@ -135,22 +135,6 @@
     ]
   },
   {
-    "id": "faux-marble-dining-set",
-    "name": "Faux Marble Dining Set with 4 Chairs",
-    "category": "dining",
-    "price": 399,
-    "compareAtPrice": null,
-    "clearance": true,
-    "inStock": true,
-    "customSizes": false,
-    "description": "Faux marble table with four chairs. Wipes clean and seats the whole family.",
-    "image": "/images/products/faux-marble-dining-set.jpg",
-    "tags": [
-      "Clearance",
-      "Seats 4"
-    ]
-  },
-  {
     "id": "grey-sectional-sofa-bed",
     "name": "Ethan Sectional Sofa Bed",
     "category": "sofas",
@@ -205,24 +189,6 @@
     ]
   },
   {
-    "id": "swivel-accent-chair",
-    "name": "Swivel Accent Chair",
-    "category": "accent-chairs",
-    "price": 299,
-    "compareAtPrice": 599,
-    "clearance": true,
-    "inStock": true,
-    "customSizes": false,
-    "description": "Canadian-made swivel chair in teal green with a loose cushion back and a solid wood frame.",
-    "image": "/images/products/swivel-accent-chair.jpg",
-    "tags": [
-      "Clearance",
-      "Canadian made",
-      "Swivel",
-      "Solid wood"
-    ]
-  },
-  {
     "id": "bronx-accent-chair",
     "name": "Bronx Accent Chair",
     "category": "accent-chairs",
@@ -249,23 +215,6 @@
     "customSizes": false,
     "description": "Canadian-made accent chair with a solid wood frame.",
     "image": "/images/products/rome-accent-chair.jpg",
-    "tags": [
-      "Clearance",
-      "Canadian made",
-      "Solid wood"
-    ]
-  },
-  {
-    "id": "kylie-accent-chair",
-    "name": "Kylie Accent Chair",
-    "category": "accent-chairs",
-    "price": 349,
-    "compareAtPrice": 699,
-    "clearance": true,
-    "inStock": true,
-    "customSizes": false,
-    "description": "Canadian-made accent chair with a solid wood frame.",
-    "image": "/images/products/kylie-accent-chair.jpg",
     "tags": [
       "Clearance",
       "Canadian made",
@@ -307,23 +256,6 @@
     ]
   },
   {
-    "id": "kendall-sofa-loveseat",
-    "name": "Kendall Sofa + Loveseat",
-    "category": "sofas",
-    "price": 599,
-    "compareAtPrice": 1199,
-    "clearance": true,
-    "inStock": true,
-    "customSizes": false,
-    "description": "Canadian-made sofa and loveseat with a solid wood frame.",
-    "image": "/images/products/kendall-sofa-loveseat.jpg",
-    "tags": [
-      "Clearance",
-      "Sofa + loveseat",
-      "Canadian made"
-    ]
-  },
-  {
     "id": "cloud-5pc-sectional-suite",
     "name": "Cloud 5-Piece Sectional Suite",
     "category": "sofas",
@@ -354,23 +286,6 @@
     "tags": [
       "Clearance",
       "Gold metal legs",
-      "Canadian made"
-    ]
-  },
-  {
-    "id": "ella-sofa-loveseat",
-    "name": "Ella Sofa + Loveseat",
-    "category": "sofas",
-    "price": 1299,
-    "compareAtPrice": 2199,
-    "clearance": true,
-    "inStock": true,
-    "customSizes": false,
-    "description": "Canadian-made sofa and loveseat with a solid wood frame.",
-    "image": "/images/products/ella-sofa-loveseat.jpg",
-    "tags": [
-      "Clearance",
-      "Sofa + loveseat",
       "Canadian made"
     ]
   },
@@ -422,23 +337,6 @@
     "tags": [
       "Queen",
       "On sale"
-    ]
-  },
-  {
-    "id": "aura-queen-bed-set",
-    "name": "Aura Queen Bed Set",
-    "category": "beds",
-    "price": 1099,
-    "compareAtPrice": 1799,
-    "clearance": true,
-    "inStock": true,
-    "customSizes": false,
-    "description": "Queen bedroom set: includes the queen bed, a dresser with mirror and one nightstand.",
-    "image": "/images/products/aura-queen-bed-set.jpg",
-    "tags": [
-      "Clearance",
-      "Bedroom set",
-      "Dresser + mirror + nightstand"
     ]
   }
 ]
