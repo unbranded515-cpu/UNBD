@@ -172,7 +172,7 @@
   },
   {
     "id": "grey-sectional-floating-ottoman",
-    "name": "Grey Sectional Sofa with Floating Ottoman",
+    "name": "Christie Sofa with Floating Ottoman",
     "category": "sofas",
     "price": 399,
     "compareAtPrice": 799,
@@ -182,7 +182,7 @@
     "description": "Grey fabric sectional sofa with a floating ottoman, two built-in cup holders, a USB charging port and a reversible chaise.",
     "image": "/images/products/grey-sectional-floating-ottoman.jpg",
     "tags": [
-      "Clearance",
+      "Black Friday",
       "Reversible chaise",
       "USB charging",
       "2 cup holders"
@@ -337,6 +337,158 @@
     "tags": [
       "Queen",
       "On sale"
+    ]
+  },
+  {
+    "id": "zoey-sectional",
+    "name": "Zoey Canadian Made Sectional",
+    "category": "sofas",
+    "price": 1399,
+    "compareAtPrice": 1999,
+    "clearance": false,
+    "inStock": true,
+    "customSizes": false,
+    "description": "Canadian-made charcoal sectional with tufted seats and a roomy chaise.",
+    "image": "/images/products/zoey-sectional.jpg",
+    "tags": [
+      "Black Friday",
+      "Canadian made",
+      "Chaise"
+    ]
+  },
+  {
+    "id": "cuddler-sectional",
+    "name": "Canadian Made Cuddler Sectional",
+    "category": "sofas",
+    "price": 999,
+    "compareAtPrice": 1499,
+    "clearance": false,
+    "inStock": true,
+    "customSizes": false,
+    "description": "Canadian-made sectional with a deep cuddler corner seat in soft grey fabric.",
+    "image": "/images/products/cuddler-sectional.jpg",
+    "tags": [
+      "Black Friday",
+      "Canadian made",
+      "Cuddler seat"
+    ]
+  },
+  {
+    "id": "alex-leather-sofa",
+    "name": "Alex Leather Sofa",
+    "category": "sofas",
+    "price": 1199,
+    "compareAtPrice": 1999,
+    "clearance": false,
+    "inStock": true,
+    "customSizes": false,
+    "description": "Black leather sofa with plush padded arms and back cushions.",
+    "image": "/images/products/alex-leather-sofa.jpg",
+    "tags": [
+      "Black Friday",
+      "Leather"
+    ]
+  },
+  {
+    "id": "island-sectional-sofa-bed",
+    "name": "Island Sectional Sofa Bed",
+    "category": "sofas",
+    "price": 699,
+    "compareAtPrice": 1199,
+    "clearance": false,
+    "inStock": true,
+    "customSizes": false,
+    "description": "Grey sectional that pulls out into a bed, with lift-up storage in the chaise.",
+    "image": "/images/products/island-sectional-sofa-bed.jpg",
+    "tags": [
+      "Black Friday",
+      "Pull-out bed",
+      "Storage chaise"
+    ]
+  },
+  {
+    "id": "amy-sofa-floating-ottoman",
+    "name": "Amy Sofa with Floating Ottoman",
+    "category": "sofas",
+    "price": 799,
+    "compareAtPrice": 1199,
+    "clearance": false,
+    "inStock": true,
+    "customSizes": false,
+    "description": "Grey sofa with a floating ottoman you can place on either side.",
+    "image": "/images/products/amy-sofa-floating-ottoman.jpg",
+    "tags": [
+      "Black Friday",
+      "Floating ottoman"
+    ]
+  },
+  {
+    "id": "bronx-7pc-dining-set",
+    "name": "Bronx 7-Piece Dining Set",
+    "category": "dining",
+    "price": 1099,
+    "compareAtPrice": 1999,
+    "clearance": false,
+    "inStock": true,
+    "customSizes": false,
+    "description": "Glass-top dining table with six black chairs on chrome legs. Seven pieces in all.",
+    "image": "/images/products/bronx-7pc-dining-set.jpg",
+    "tags": [
+      "Black Friday",
+      "Seats 6",
+      "Glass top"
+    ]
+  },
+  {
+    "id": "david-queen-bed",
+    "name": "David Queen Size Bed",
+    "category": "beds",
+    "price": 249,
+    "compareAtPrice": 499,
+    "clearance": false,
+    "inStock": true,
+    "customSizes": false,
+    "description": "Grey upholstered queen bed with a tufted headboard.",
+    "image": "/images/products/david-queen-bed.jpg",
+    "tags": [
+      "Black Friday",
+      "Queen",
+      "Upholstered"
+    ]
+  },
+  {
+    "id": "doris-king-bed",
+    "name": "Doris King Size Bed",
+    "category": "beds",
+    "price": 299,
+    "compareAtPrice": 699,
+    "clearance": false,
+    "inStock": true,
+    "customSizes": false,
+    "description": "King size bed with a channel-stitched headboard. Available in black or brown.",
+    "image": "/images/products/doris-king-bed.jpg",
+    "tags": [
+      "Black Friday",
+      "King",
+      "Black or brown"
+    ]
+  },
+  {
+    "id": "hybrid-ice-plush-queen-mattress",
+    "name": "Hybrid Ice Plush Queen Mattress",
+    "category": "mattresses",
+    "price": 299,
+    "compareAtPrice": 599,
+    "clearance": false,
+    "inStock": true,
+    "customSizes": false,
+    "description": "Hybrid queen mattress with a plush, cooling top layer.",
+    "image": "/images/products/hybrid-ice-plush-queen-mattress.jpg",
+    "tags": [
+      "Black Friday",
+      "Queen",
+      "Plush",
+      "Hybrid"
     ]
   }
 ]
